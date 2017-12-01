@@ -1,3 +1,10 @@
+title = "Login Page"
+url = "/login"
+
+[account]
+redirect = "dashboard"
+==
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -5,7 +12,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>SAASPRO - SAAS Product Template</title>
+        <title>AISCO WEB :: Login</title>
         <!-- Favicon -->
         <link rel="shortcut icon" href="{{ 'assets/images/favicon.ico'|theme }}">
         <!-- Bootstrap -->
@@ -27,7 +34,7 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body class="login-body">
         <!-- ==============================================
         **PAGE LOADER**
         =============================================== -->
@@ -39,13 +46,38 @@
 
         </div>
         
-        {% partial 'site/header' %}
-        
-        <section id="layout-content">
-            {% page %}
+        <section class="login-holder">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 col-xs-offset-0">
+                        <div class="login-box">
+                            <div class="login-header text-center">
+                                <h3 class="login-title">Silahkan Login di Sini</h3>
+                            </div>
+                            <div class="login-body">
+                                <form method="post" data-request="onSignIn">
+                                    <div class="form-group">
+                                        <label for="email">Alamat Email</label>
+                                        <input class="form-control" type="email" name="email" placeholder="Masukkan Alamat Email" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input class="form-control" type="password" name="password" placeholder="Masukkan Password" />
+                                    </div>
+                                    <button class="btn btn-theme-primary btn-block" type="submit">Login</button>
+                                </form>
+                            </div>
+                            <div class="login-footer">
+                                <div class="text-center mt-10 mb-10">
+                                    <p>Belum punya Akun? <a href="/#register">Registrasi disini</a></p>
+                                    <p>Tolong! <a href="/forgot-password">Saya lupa passwordnya</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-        
-        {% partial 'site/footer' %}
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="{{ 'assets/js/jquery.min.js'|theme }}"></script>

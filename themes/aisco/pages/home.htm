@@ -1,6 +1,9 @@
 title = "Landing Page"
 url = "/"
 layout = "default"
+
+[account]
+[session]
 ==
 
 <section class="main-cover dark-image-bg">
@@ -10,12 +13,31 @@ layout = "default"
                 <div class="cover-info">
                     {% content "cover.htm" %}
                 </div>
-
+            </div>
+            <div class="col-md-4 col-md-offset-4 col-sm-12 col-xs-12">
+                <div class="cover-info">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <form method="post" data-request="onRegister" id="registration-form">
+                                <div class="form-group">
+                                    <input name="name" id="name" class="form-control" type="text" placeholder="Nama Lengkap" />
+                                </div>
+                                <div class="form-group">
+                                    <input name="email" id="email" class="form-control" type="email" placeholder="Alamat Email" />
+                                </div>
+                                <div class="form-group">
+                                    <input name="password" id="password" class="form-control" type="password" placeholder="Password" />
+                                </div>
+                                <div class="form-group">
+                                        <input name="password_confirmation" id="password_confirmation" type="password" class="form-control" placeholder="Konfirmasi Password" />
+                                </div>
+                                <button class="btn btn-theme-primary btn-block" type="submit">Daftar Sekarang!</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="main-cover-image">
-        
     </div>
 </section>
 
