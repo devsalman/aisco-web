@@ -1,0 +1,14 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table rselab_sple_products'
+    - builder_table_create_rselab_sple_products.php
+1.0.3:
+    - 'Updated table rselab_sple_products'
+    - builder_table_update_rselab_sple_products.php
+1.0.4:
+    - 'Created table rselab_sple_groups'
+    - builder_table_create_rselab_sple_groups.php
+1.0.5:
+    - 'Updated table rselab_sple_products'
+    - builder_table_update_rselab_sple_products2.php

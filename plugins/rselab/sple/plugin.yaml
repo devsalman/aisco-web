@@ -1,0 +1,6 @@
+plugin:
+    name: 'rselab.sple::lang.plugin.name'
+    description: 'rselab.sple::lang.plugin.description'
+    author: 'RSE Lab'
+    icon: oc-icon-cubes
+    homepage: 'http://rse.cs.ui.ac.id/'

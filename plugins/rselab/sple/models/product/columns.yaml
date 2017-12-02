@@ -1,0 +1,18 @@
+columns:
+    id:
+        label: id
+        type: number
+    name:
+        label: name
+        type: text
+        searchable: true
+    display_name:
+        label: 'rselab.sple::lang.rselab.sple.label.product_display_name'
+        type: text
+        searchable: true
+    created_at:
+        label: 'rselab.sple::lang.rselab.sple.label.created_at'
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime
