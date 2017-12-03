@@ -6,6 +6,9 @@ class Plugin extends PluginBase
 {
     public function registerComponents()
     {
+        return [
+            'RseLab\Sple\Components\SpleProducts' => 'spleProducts'
+        ];
     }
 
     public function registerSettings()

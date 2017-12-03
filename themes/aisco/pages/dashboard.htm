@@ -2,6 +2,7 @@ title = "User Dashboard Page"
 url = "user/dashboard"
 layout = "default"
 
+[spleProducts]
 [session]
 security = "user"
 redirect = "/"
@@ -42,6 +43,9 @@ redirect = "/"
                 <div class="ptb-10 bg-gray">
                     <h6 class="text-center ls-1 text-uppercase heading-thin">Buat Website Baru</h6>
                 </div>
+                {% for group,product in spleProducts.products %}
+                    {{group}}
+                {% endfor %}
             </div>
         </div>
     </div>
