@@ -1,0 +1,17 @@
+name: Groups
+modelClass: RseLab\Sple\Models\Group
+form: $/rselab/sple/models/group/fields.yaml
+defaultRedirect: rselab/sple/groups
+create:
+    title: 'rselab.sple::lang.rselab.sple.title.create_groups'
+    redirect: 'rselab/sple/groups/update/:id'
+    redirectClose: rselab/sple/groups
+    flashSave: 'rselab.sple::lang.rselab.sple.flash.save_success'
+update:
+    title: 'rselab.sple::lang.rselab.sple.title.update_groups'
+    redirect: rselab/sple/groups
+    redirectClose: rselab/sple/groups
+    flashSave: 'rselab.sple::lang.rselab.sple.flash.save_success'
+    flashDelete: 'rselab.sple::lang.rselab.sple.flash.delete_success'
+preview:
+    title: 'rselab.sple::lang.rselab.sple.title.detail_group'

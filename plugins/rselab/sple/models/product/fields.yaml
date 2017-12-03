@@ -14,13 +14,18 @@ fields:
         span: auto
         required: 1
         type: text
-    file_upload:
+    abs_file:
         label: 'rselab.sple::lang.rselab.sple.label.product_file_upload'
-        span: auto
         mode: file
         useCaption: true
         thumbOptions:
             mode: crop
             extension: auto
+        span: auto
         required: 1
         type: fileupload
+    group_id:
+        label: 'rselab.sple::lang.rselab.sple.label.product_group'
+        span: auto
+        required: 1
+        type: dropdown

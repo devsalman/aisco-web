@@ -4,3 +4,17 @@ plugin:
     author: 'RSE Lab'
     icon: oc-icon-cubes
     homepage: 'http://rse.cs.ui.ac.id/'
+navigation:
+    rse-sple-main-menu:
+        label: 'rselab.sple::lang.rselab.sple.menu.main'
+        url: rselab/sple/products
+        icon: icon-cubes
+        sideMenu:
+            rselab-sple-menu-products:
+                label: 'rselab.sple::lang.rselab.sple.menu.manage_products'
+                url: rselab/sple/products
+                icon: icon-cubes
+            rselab-sple-menu-groups:
+                label: 'rselab.sple::lang.rselab.sple.menu.manage_groups'
+                url: rselab/sple/groups
+                icon: icon-sitemap

@@ -1,0 +1,16 @@
+name: Products
+modelClass: RseLab\Sple\Models\Product
+form: $/rselab/sple/models/product/fields.yaml
+defaultRedirect: rselab/sple/products
+create:
+    title: 'rselab.sple::lang.rselab.sple.title.create_product'
+    redirect: 'rselab/sple/products/update/:id'
+    redirectClose: rselab/sple/products
+    flashSave: 'rselab.sple::lang.rselab.sple.flash.save_success'
+update:
+    title: 'rselab.sple::lang.rselab.sple.title.update_product'
+    redirect: rselab/sple/products
+    redirectClose: rselab/sple/products
+    flashSave: 'rselab.sple::lang.rselab.sple.flash.save_success'
+    flashDelete: 'rselab.sple::lang.rselab.sple.flash.delete_success'
+preview: {  }

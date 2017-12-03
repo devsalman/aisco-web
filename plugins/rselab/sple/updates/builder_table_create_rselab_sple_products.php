@@ -14,7 +14,9 @@ class BuilderTableCreateRselabSpleProducts extends Migration
             $table->string('name', 50);
             $table->string('display_name', 50);
             $table->text('description');
-            $table->string('file_location', 255);
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');
+            $table->timestamp('deleted_at')->nullable();
         });
     }
     

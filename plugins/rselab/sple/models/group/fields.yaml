@@ -1,0 +1,14 @@
+fields:
+    name:
+        label: 'rselab.sple::lang.rselab.sple.label.group_name'
+        span: auto
+        required: 1
+        type: text
+    display_name:
+        label: 'rselab.sple::lang.rselab.sple.label.group_display_name'
+        span: auto
+        type: text
+    description:
+        label: 'rselab.sple::lang.rselab.sple.label.group_description'
+        span: auto
+        type: text

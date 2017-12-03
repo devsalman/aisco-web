@@ -1,0 +1,18 @@
+columns:
+    id:
+        label: id
+        type: number
+    name:
+        label: group_name
+        type: text
+        sortable: true
+    display_name:
+        label: 'rselab.sple::lang.rselab.sple.label.group_display_name'
+        type: text
+        sortable: true
+    created_at:
+        label: 'rselab.sple::lang.rselab.sple.label.created_at'
+        type: datetime
+    updated_at:
+        label: 'rselab.sple::lang.rselab.sple.label.updated_at'
+        type: datetime
