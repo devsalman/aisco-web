@@ -43,8 +43,18 @@ redirect = "/"
                 <div class="ptb-10 bg-gray">
                     <h6 class="text-center ls-1 text-uppercase heading-thin">Buat Website Baru</h6>
                 </div>
-                {% for group,product in spleProducts.products %}
-                    {{group}}
+                
+                {% for group,products in spleProducts.products %}
+                <h4 class="ptb-10">{{ group }}</h4>
+                    <div class="list-group">
+                        {% for product in products %}
+                        <a href="#{{product.name}}" class="list-group-item"
+                            data-toggle="tooltip" data-placement="left"
+                            title="{{ product.description }}">
+                            {{ product.display_name}}
+                        </a>
+                        {% endfor %}
+                    </div>
                 {% endfor %}
             </div>
         </div>
