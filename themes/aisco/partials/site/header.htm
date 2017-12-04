@@ -21,11 +21,12 @@
                     <li><a href="technologies">Teknologi</a></li>
                     <li><a href="testimonials">Testimoni</a></li>
                     <li><a href="researches">Penelitian</a></li>
-                    <li><a href="login">Login</a></li>
                     <li><a href="contact-us">Contact Us</a></li>
                     {% if user %}
                     <li><a href="user/dashboard">Dashboard</a></li>
                     <li><a href="#" data-request="onLogout" data-request-data="redirect: '/'">Sign out</a></li>
+                    {% else %}
+                    <li><a href="login">Login</a></li>
                     {% endif %}
                 </ul>
             </div><!-- /.navbar-collapse -->
