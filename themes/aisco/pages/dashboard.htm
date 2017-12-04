@@ -43,7 +43,23 @@ redirect = "/"
                 <div class="ptb-10 bg-gray">
                     <h6 class="text-center ls-1 text-uppercase heading-thin">Buat Website Baru</h6>
                 </div>
-                
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="site-title">Nama Website:</label>
+                        <input class="form-control" type="text" name="site-title" placeholder="Tulis nama website yang akan dibuat" />
+                    </div>
+                    <div class="form-group">
+                            <label for="site-description">Deskripsi Website:</label>
+                            <input class="form-control" type="text" name="site-description" placeholder="Tulis deskripsi website kamu" />
+                        </div>
+                    <div class="form-group">
+                            <label for="site-url">URL Website:</label>
+                            <div class="input-group">
+                                <input class="form-control" type="text" name="site-url" placeholder="mysite-xyz" />
+                                <div class="input-group-addon">.aiscoweb.org</div>
+                            </div>
+                        </div>
+                </form>
                 {% for group,products in spleProducts.products %}
                 <h4 class="ptb-10">{{ group }}</h4>
                     <div class="list-group">
@@ -56,6 +72,8 @@ redirect = "/"
                         {% endfor %}
                     </div>
                 {% endfor %}
+
+                <button class="btn btn-primary btn-block btn-lg" type="submit">Proses</button>
             </div>
         </div>
     </div>
