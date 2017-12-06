@@ -6,8 +6,8 @@ layout = "default"
 <section class="main-banner">
     <div class="container">
         <div class="banner-content text-center">
-            <h2>Teknologi</h2>
-            <h6>Lorem Ipsum Dolor Sit Amet</h6>
+            <h2>Technologies</h2>
+            <h6>PRICES (Precise Requirement Changes Integrated System)</h6>
         </div>
     </div>
 </section>
@@ -18,8 +18,18 @@ layout = "default"
 <section class="call-to-action action-light ptb-100">
     <div class="container">
         <div class="action-content text-center">
-            {% content "technology/delta_modelling.htm" %}
-            <a class="btn btn-theme-primary" href="#">Baca Selengkapnya</a>
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <div class="action-content text-center">
+                        {% content "technology/delta_modelling.htm" %}
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="features-image">
+                        <img src="{{ 'assets/images/technology/applying_delta.png'|theme }}" alt="image" class="img-responsive animateme" data-when="enter" data-from="0.5" data-to="0" data-opacity="0" data-translatex="-300">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -31,19 +41,26 @@ layout = "default"
     <div class="container">
         <div class="action-content text-center">
             {% content "technology/abs.htm" %}
-            <a class="btn btn-theme-white" href="#">Baca Selengkapnya</a>
         </div>
     </div>
 </section>
 
 <div class="ptb-20 bg-gray">
-        <h5 class="text-center ls-1 text-uppercase heading-thin">Adaptive Information System</h5>
+        <h5 class="text-center ls-1 text-uppercase heading-thin">Prices Tools</h5>
     </div>
     <section class="call-to-action action-gray ptb-100">
         <div class="container">
-            <div class="action-content text-center">
-                {% content "technology/adaptive_information_system.htm" %}
-                <a class="btn btn-theme-primary" href="#">Baca Selengkapnya</a>
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                <div class="features-image">
+                        <img src="{{ 'assets/images/technology/prices-project.png'|theme }}" alt="image" class="img-responsive animateme" data-when="enter" data-from="0.5" data-to="0" data-opacity="0" data-translatex="-300">
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="action-content text-center">
+                        {% content "technology/adaptive_information_system.htm" %}
+                    </div>
+                </div>
             </div>
         </div>
     </section>
