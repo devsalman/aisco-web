@@ -20,26 +20,24 @@ redirect = "/"
 <section class="contact ptb-80">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-xs-12">
+            <div class="col-md-6 col-xs-12">
                 <div class="ptb-10 bg-gray">
-                    <h6 class="text-center ls-1 text-uppercase heading-thin">Informasi Akun</h6>
+                    <h6 class="text-center ls-1 text-uppercase heading-thin">Pilih Fitur</h6>
                 </div>
-                <p class="mb-10">Nama: {{ user.name }}</p>
-                <p class="mb-10">Email: {{ user.email }}</p>
-                <p class="mb-10">Register: {{ user.created_at }}</p>
-                <br />
-
-                <div class="ptb-10 bg-gray">
-                    <h6 class="text-center ls-1 text-uppercase heading-thin">Website</h6>
-                </div>
-                <ul>
-                    <li><span class="ti-world"></span> &nbsp; <a href="#">beribuku.aiscoweb.org</a></li>
-                    <li><span class="ti-world"></span> &nbsp; <a href="#">1000lembar.aiscoweb.org</a></li>
-                    <li><span class="ti-world"></span> &nbsp; <a href="#">1untuksemua.aiscoweb.org</a></li>
-                    <li><span class="ti-world"></span> &nbsp; <a href="#">1usdbook.aiscoweb.org</a></li>
-                </ul>
+                {% for group,products in spleProducts.products %}
+                <h4 class="ptb-10">{{ group }}</h4>
+                    <div class="list-group">
+                        {% for product in products %}
+                        <button type="button" class="list-group-item feature"
+                            data-toggle="tooltip" data-placement="top"
+                            title="{{ product.description }}" id="{{ product.name }}">
+                            {{ product.display_name}}
+                        </button>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
             </div>
-            <div class="col-md-8 col-xs-12">
+            <div class="col-md-6 col-xs-12">
                 <div class="ptb-10 bg-gray">
                     <h6 class="text-center ls-1 text-uppercase heading-thin">Buat Website Baru</h6>
                 </div>
@@ -49,32 +47,48 @@ redirect = "/"
                         <input class="form-control" type="text" name="site-title" placeholder="Tulis nama website yang akan dibuat" />
                     </div>
                     <div class="form-group">
-                            <label for="site-description">Deskripsi Website:</label>
-                            <input class="form-control" type="text" name="site-description" placeholder="Tulis deskripsi website kamu" />
-                        </div>
-                    <div class="form-group">
-                            <label for="site-url">URL Website:</label>
-                            <div class="input-group">
-                                <input class="form-control" type="text" name="site-url" placeholder="mysite-xyz" />
-                                <div class="input-group-addon">.aiscoweb.org</div>
-                            </div>
-                        </div>
-                </form>
-                {% for group,products in spleProducts.products %}
-                <h4 class="ptb-10">{{ group }}</h4>
-                    <div class="list-group">
-                        {% for product in products %}
-                        <a href="#{{product.name}}" class="list-group-item"
-                            data-toggle="tooltip" data-placement="left"
-                            title="{{ product.description }}">
-                            {{ product.display_name}}
-                        </a>
-                        {% endfor %}
+                        <label for="site-description">Deskripsi Website:</label>
+                        <input class="form-control" type="text" name="site-description" placeholder="Tulis deskripsi website kamu" />
                     </div>
-                {% endfor %}
-
-                <button class="btn btn-primary btn-block btn-lg" type="submit">Proses</button>
+                    <div class="form-group">
+                        <label for="site-url">URL Website:</label>
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="site-url" placeholder="mysite-xyz" />
+                            <div class="input-group-addon">.aiscoweb.org</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-block btn-lg" type="submit">Proses</button>
+                </form>
             </div>
         </div>
     </div>
 </section>
+
+{% put scripts %}
+<script type="text/javascript">
+$(document).ready(function() {
+    var features = [];
+    $('button.feature').on('click', function() {
+        var featureName = $(this).attr('id');
+        if(!$(this).hasClass('selected')) {
+            $(this).css('background-color','#00cc66');
+            $(this).css('color','#fff');
+            $(this).addClass('selected');
+            features.push(featureName);
+        } else {
+            $(this).css('background-color','#fff');
+            $(this).css('color', '#555');
+            $(this).removeClass('selected');
+            if((index = features.indexOf(featureName)) > -1) {
+                features.splice(index, 1);
+            }
+        }
+    });
+
+    $('button[type="submit"]').on('click', function(e) {
+        e.preventDefault();
+        console.log("submit");
+    });
+});
+</script>
+{% endput %}
