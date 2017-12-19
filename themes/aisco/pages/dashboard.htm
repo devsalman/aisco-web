@@ -99,7 +99,7 @@ redirect = "/"
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save Changes</button>
+                    <button type="button" class="btn btn-primary" id="button_confirm">Save Changes</button>
                 </div>
             </div>
         </div>
@@ -129,7 +129,31 @@ $(document).ready(function() {
 
     $('button[type="submit"]').on('click', function(e) {
         e.preventDefault();
-        console.log("submit");
+        var name = $('input[name="site-title"]').val();
+        var description = $('input[name="site-description"]').val();
+        var url = $('input[name="site-url"]').val();
+
+        $('#modal_websiteName').text(name);
+        $('#modal_websiteDescription').text(description);
+        $('#modal_websiteURL').text(url+".aiscoweb.org");
+        $('ul#modal_websiteFeatures').empty();
+        $('button.list-group-item.feature.selected').each(function() {
+            $('ul#modal_websiteFeatures').append("<li>"+$(this).text().trim()+"</li>");
+        });
+
+    });
+
+    $('#button_confirm').on('click', function() {
+        var name = $('input[name="site-title"]').val();
+        var description = $('input[name="site-description"]').val();
+        var url = $('input[name="site-url"]').val();
+        var features = [];
+
+        $('button.list-group-item.feature.selected').each(function() {
+            features.push($(this).attr('id'));
+        });
+
+        $('#confirmationModal').modal('hide');
     });
 });
 </script>
