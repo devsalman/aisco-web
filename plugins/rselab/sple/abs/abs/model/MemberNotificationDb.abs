@@ -1,0 +1,44 @@
+// generated abs fli code for MemberNotificationImpl
+module MMemberNotificationDbImpl;
+export MemberNotificationDb,MemberNotificationDbImpl;
+import MemberNotification,MemberNotificationImpl from MMemberNotificationModel;
+import * from ABS.FLI;
+
+
+interface MemberNotificationDb {
+	List<MemberNotification> findAll(String className);
+	List<MemberNotification> findAllByAttributes(String className, String query);
+	MemberNotification find(String className);
+	MemberNotification findByAttributes(String className, String query);
+	Unit save(MemberNotification object);
+	Unit delete(MemberNotification object);
+	MemberNotification update(MemberNotification object);
+	String log(String log);
+}
+
+
+[Foreign]
+class MemberNotificationDbImpl implements MemberNotificationDb {
+	List<MemberNotification> findAllByAttributes(String className, String query) {
+		return Nil;
+	}
+	List<MemberNotification> findAll(String className) {
+		return Nil;
+	}
+	MemberNotification findByAttributes(String className, String query) {
+		return new local MemberNotificationImpl();
+	}
+	MemberNotification find(String className) {
+		return new local MemberNotificationImpl();
+	}
+	Unit save(MemberNotification object) {
+	}
+	Unit delete(MemberNotification object) {
+	}
+	MemberNotification update(MemberNotification object) {
+		return new local MemberNotificationImpl();
+	}
+	String log(String log) {
+		return "return log";
+	}
+}

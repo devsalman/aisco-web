@@ -1,0 +1,63 @@
+module MInstitutionalBeneficiaryModel;
+export *;
+
+interface InstitutionalBeneficiary {
+	Unit setIdInstitutionalBeneficiary(Int id);
+	Int getIdInstitutionalBeneficiary();
+	Unit setName(String name);
+	String getName();
+	Unit setEmail(String email);
+    String getEmail();
+    Unit setPhone(String phone);
+    String getPhone();
+    Unit setAddress(String address);
+    String getAddress();
+}
+
+class InstitutionalBeneficiaryImpl implements InstitutionalBeneficiary {
+	[PK] Int idInstitutionalBeneficiary = 0;
+	String name = "";
+	String email = "";
+	String phone = "";
+	String address = "";
+
+	Unit setIdInstitutionalBeneficiary(Int idInstitutionalBeneficiary){
+		this.idInstitutionalBeneficiary = idInstitutionalBeneficiary;
+	}
+
+	Int getIdInstitutionalBeneficiary(){
+		return this.idInstitutionalBeneficiary;
+	}
+
+	Unit setName(String name){
+		this.name = name;
+	}
+
+	String getName(){
+		return this.name;
+	}
+
+	Unit setEmail(String email){
+        this.email = email;
+    }
+
+    String getEmail(){
+        return this.email;
+    }
+
+    Unit setPhone(String phone){
+        this.phone = phone;
+    }
+
+    String getPhone(){
+        return this.phone;
+    }
+
+    Unit setAddress(String address){
+        this.address = address;
+    }
+
+    String getAddress(){
+        return this.address;
+    }
+}

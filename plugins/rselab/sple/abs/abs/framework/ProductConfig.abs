@@ -1,0 +1,8 @@
+productline COS;
+	features ProgramData, Periodic, Eventual, Continuous,
+       PublicationSystem, MemberNotification, StoryBoard, AutomaticReport,
+       FinancialReport, Income, Expense, Donor, Summary,
+		ObjectiveTarget, Product, InstitutionalBeneficiary, IndividualBeneficiary,
+		DonationData, Money, Item, Confirmation;
+
+delta DProgramController when Periodic;

@@ -1,0 +1,44 @@
+root CharityOrganizationSystem {
+   group allof {
+        ProgramData {
+            group [1..*] {
+                Periodic,
+                Continous,
+                Eventual
+             }
+        },
+        PublicationSystem {
+             group allof {
+                opt MemberNotification {require: Donor;},
+                opt AutomaticReport {require: Summary;},
+                opt StoryBoard
+             }
+        },
+        FinancialReport {
+             group [1..*]{
+                Summary {exclude:Income; exclude: Expense;},
+                Donor,
+                Expense,
+                Income
+             }
+        },
+        opt DonationData {
+             group [0..*] {
+                Money,
+                Item,
+                Confirmation
+             }
+        } ,
+        opt ObjectiveTarget {
+             group [1..*]{
+                  Beneficiary{
+                       group [1..*] {
+                            IndividualBeneficiary,
+                            InstitutionalBeneficiary
+                       }
+                  },
+                  Product
+             }
+        }
+   }
+}

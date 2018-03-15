@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head th:replace="fragments :: head"></head>
+	<body>
+        <div th:replace="fragments :: navigation"></div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div th:replace="fragments :: menu"></div>
+                <div class="col-sm-9">
+                    <a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Pemasukan</strong></a>
+                    <hr />
+
+                    <div class="row margin-bottom-10">
+                        <div class="col-md-12">
+                            <a th:href="@{~/admin/income/create.abs}" class="btn btn-primary">Buat Pemasukan</a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tanggal</th>
+                                        <th>Deskripsi</th>
+                                        <th>Jumlah</th>
+                                        <th>Program</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="income : ${dataList}">
+                                        <td th:text="${income.idIncome}">1</td>
+                                        <td><a th:text="${income.date.getString()}" th:href="@{~/admin/income/detail.abs(idIncome=${income.idIncome})}">Detail</a></td>
+                                        <td th:text="${income.description.getString()}">Description</td>
+                                        <td th:text="${income.amount}">Amount</td>
+                                        <td th:text="${income.idProgram}">Program</td>
+                                        <td>
+                                            <a th:href="@{~/admin/income/delete.abs(idIncome=${income.idIncome})}">Delete</a> |
+                                            <a th:href="@{~/admin/income/edit.abs(idIncome=${income.idIncome})}">Edit</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="fragments :: footer"></footer>
+	</body>
+</html>

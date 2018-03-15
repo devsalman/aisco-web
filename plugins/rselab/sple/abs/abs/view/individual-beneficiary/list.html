@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head th:replace="fragments :: head"></head>
+	<body>
+        <div th:replace="fragments :: navigation"></div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div th:replace="fragments :: menu"></div>
+                <div class="col-sm-9">
+                    <a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Penerima Individu</strong></a>
+                    <hr />
+
+                    <div class="row margin-bottom-10">
+                        <div class="col-md-12">
+                            <a th:href="@{~/admin/individual-beneficiary/create.abs}" class="btn btn-primary btn-create">Buat Penerima Individu</a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nama</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="individualBeneficiary: ${dataList}">
+                                        <td th:text="${individualBeneficiary.idIndividualBeneficiary}">1</td>
+                                        <td><a th:text="${individualBeneficiary.name.getString()}" th:href="@{~/admin/individual-beneficiary/detail.abs(idIndividualBeneficiary=${individualBeneficiary.idIndividualBeneficiary})}">Detail</a></td>
+                                        <td>
+                                            <a th:href="@{~/admin/individual-beneficiary/delete.abs(idIndividualBeneficiary=${individualBeneficiary.idIndividualBeneficiary})}" class="btn-delete">Delete</a> |
+                                            <a th:href="@{~/admin/individual-beneficiary/edit.abs(idIndividualBeneficiary=${individualBeneficiary.idIndividualBeneficiary})}" class="btn-edit">Edit</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="fragments :: footer"></footer>
+	</body>
+</html>

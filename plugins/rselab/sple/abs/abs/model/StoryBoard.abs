@@ -1,0 +1,39 @@
+module MStoryBoardModel;
+export *;
+
+interface StoryBoard {
+	Int getIdStoryBoard();
+    Unit setIdStoryBoard(Int idStoryBoard);
+	Int getIdProgram();
+    Unit setIdProgram(Int idProgram);
+    String getTitle();
+    Unit setTitle(String title);
+    String getContent();
+    Unit setContent(String content);
+    String getPublishDate();
+    Unit setPublishDate(String publishDate);
+    String getThumbnailUrl();
+    Unit setThumbnailUrl(String thumbnailUrl);
+}
+
+class StoryBoardImpl implements StoryBoard {
+	[PK] Int idStoryBoard = 0;
+	Int idProgram = 0;
+	String title = "";
+	String content = "";
+	String publishDate = "";
+	String thumbnailUrl = "";
+
+	Int getIdStoryBoard() { return this.idStoryBoard; }
+    Unit setIdStoryBoard(Int idStoryBoard) { this.idStoryBoard = idStoryBoard; }
+	Int getIdProgram() { return this.idProgram; }
+    Unit setIdProgram(Int idProgram) { this.idProgram = idProgram; }
+    String getTitle() { return this.title; }
+    Unit setTitle(String title) { this.title = title; }
+    String getContent() { return this.content; }
+    Unit setContent(String content) { this.content = content; }
+    String getPublishDate() { return this.publishDate; }
+    Unit setPublishDate(String publishDate) { this.publishDate = publishDate; }
+    String getThumbnailUrl() { return this.thumbnailUrl; }
+    Unit setThumbnailUrl(String thumbnailUrl) { this.thumbnailUrl = thumbnailUrl; }
+}

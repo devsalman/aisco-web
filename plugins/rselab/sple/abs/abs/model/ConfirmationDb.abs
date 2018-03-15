@@ -1,0 +1,44 @@
+// generated abs fli code for ConfirmationImpl
+module MConfirmationDbImpl;
+export ConfirmationDb,ConfirmationDbImpl;
+import Confirmation,ConfirmationImpl from MConfirmationModel;
+import * from ABS.FLI;
+
+
+interface ConfirmationDb {
+	List<Confirmation> findAll(String className);
+	List<Confirmation> findAllByAttributes(String className, String query);
+	Confirmation find(String className);
+	Confirmation findByAttributes(String className, String query);
+	Unit save(Confirmation object);
+	Unit delete(Confirmation object);
+	Confirmation update(Confirmation object);
+	String log(String log);
+}
+
+
+[Foreign]
+class ConfirmationDbImpl implements ConfirmationDb {
+	List<Confirmation> findAllByAttributes(String className, String query) {
+		return Nil;
+	}
+	List<Confirmation> findAll(String className) {
+		return Nil;
+	}
+	Confirmation findByAttributes(String className, String query) {
+		return new local ConfirmationImpl();
+	}
+	Confirmation find(String className) {
+		return new local ConfirmationImpl();
+	}
+	Unit save(Confirmation object) {
+	}
+	Unit delete(Confirmation object) {
+	}
+	Confirmation update(Confirmation object) {
+		return new local ConfirmationImpl();
+	}
+	String log(String log) {
+		return "return log";
+	}
+}

@@ -1,0 +1,20 @@
+delta DProgram;
+uses MProgramModel;
+
+modifies interface Program {
+    adds String getFrequency();
+    adds String setFrequency(String frequency);
+}
+
+modifies class ProgramImpl {
+    adds String frequency;
+
+    adds String getFrequency() {
+        return this.frequency;
+    }
+
+    adds String setFrequency(String frequency) {
+        this.frequency = frequency;
+    }
+}
+

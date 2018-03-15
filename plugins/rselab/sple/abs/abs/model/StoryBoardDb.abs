@@ -1,0 +1,44 @@
+// generated abs fli code for StoryBoardImpl
+module MStoryBoardDbImpl;
+export StoryBoardDb,StoryBoardDbImpl;
+import StoryBoard,StoryBoardImpl from MStoryBoardModel;
+import * from ABS.FLI;
+
+
+interface StoryBoardDb {
+	List<StoryBoard> findAll(String className);
+	List<StoryBoard> findAllByAttributes(String className, String query);
+	StoryBoard find(String className);
+	StoryBoard findByAttributes(String className, String query);
+	Unit save(StoryBoard object);
+	Unit delete(StoryBoard object);
+	StoryBoard update(StoryBoard object);
+	String log(String log);
+}
+
+
+[Foreign]
+class StoryBoardDbImpl implements StoryBoardDb {
+	List<StoryBoard> findAllByAttributes(String className, String query) {
+		return Nil;
+	}
+	List<StoryBoard> findAll(String className) {
+		return Nil;
+	}
+	StoryBoard findByAttributes(String className, String query) {
+		return new local StoryBoardImpl();
+	}
+	StoryBoard find(String className) {
+		return new local StoryBoardImpl();
+	}
+	Unit save(StoryBoard object) {
+	}
+	Unit delete(StoryBoard object) {
+	}
+	StoryBoard update(StoryBoard object) {
+		return new local StoryBoardImpl();
+	}
+	String log(String log) {
+		return "return log";
+	}
+}

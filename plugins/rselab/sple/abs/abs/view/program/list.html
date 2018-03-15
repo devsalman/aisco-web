@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head th:replace="fragments :: head"></head>
+	<body>
+        <div th:replace="fragments :: navigation"></div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div th:replace="fragments :: menu"></div>
+                <div class="col-sm-9">
+                    <a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Program</strong></a>
+                    <hr />
+
+                    <div class="row margin-bottom-10">
+                        <div class="col-md-12">
+                            <a th:href="@{~/admin/program/create.abs}" class="btn btn-primary btn-create">Buat Program</a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nama</th>
+                                        <th>Deskripsi</th>
+                                        <th>Partner</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="program : ${dataList}">
+                                        <td th:text="${program.idProgram}">1</td>
+                                        <td><a th:text="${program.name.getString()}" th:href="@{~/admin/program/detail.abs(idProgram=${program.idProgram})}">Detail</a></td>
+                                        <td th:text="${program.description.getString()}">Description</td>
+                                        <td th:text="${program.partner.getString()}">Partner</td>
+                                        <td>
+                                            <a th:href="@{~/admin/program/delete.abs(idProgram=${program.idProgram})}" class="btn-delete">Delete</a> |
+                                            <a th:href="@{~/admin/program/edit.abs(idProgram=${program.idProgram})}" class="btn-edit">Edit</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="fragments :: footer"></footer>
+	</body>
+</html>

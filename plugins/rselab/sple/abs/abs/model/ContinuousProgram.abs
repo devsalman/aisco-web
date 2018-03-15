@@ -1,0 +1,44 @@
+module MContinuousProgramModel;
+export *;
+
+interface ContinuousProgram {
+    Int getIdContinuousProgram();
+    Unit setIdContinuousProgram(Int idContinuousProgram);
+    String getName();
+    Unit setName(String name);
+    String getEndDate();
+    Unit setEndDate(String endDate);
+    String getDescription();
+    Unit setDescription(String description);
+    String getTarget();
+    Unit setTarget(String target);
+    String getPartner();
+    Unit setPartner(String partner);
+    String getLogoUrl();
+    Unit setLogoUrl(String logoUrl);
+}
+
+class ContinuousProgramImpl implements ContinuousProgram {
+    [PK] Int idContinuousProgram = 0;
+    String name = "";
+    String description = "";
+    String endDate = "";
+    String target = "";
+    String partner = "";
+    String logoUrl = "";
+
+    Int getIdContinuousProgram() { return this.idContinuousProgram; }
+    Unit setIdContinuousProgram(Int idContinuousProgram) { this.idContinuousProgram = idContinuousProgram; }
+    String getName() { return this.name; }
+    Unit setName(String name) { this.name = name; }
+    String getEndDate() { return this.endDate; }
+    Unit setEndDate(String endDate) { this.endDate = endDate; }
+    String getDescription() { return this.description; }
+    Unit setDescription(String description) { this.description = description; }
+    String getTarget() { return this.target; }
+    Unit setTarget(String target) { this.target = target; }
+    String getPartner() { return this.partner; }
+    Unit setPartner(String partner) { this.partner = partner; }
+    String getLogoUrl() { return this.logoUrl; }
+    Unit setLogoUrl(String logoUrl) { this.logoUrl = logoUrl; }
+}

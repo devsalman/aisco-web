@@ -1,0 +1,44 @@
+// generated abs fli code for ContinuousProgramImpl
+module MContinuousProgramDbImpl;
+export ContinuousProgramDb,ContinuousProgramDbImpl;
+import ContinuousProgram,ContinuousProgramImpl from MContinuousProgramModel;
+import * from ABS.FLI;
+
+
+interface ContinuousProgramDb {
+	List<ContinuousProgram> findAll(String className);
+	List<ContinuousProgram> findAllByAttributes(String className, String query);
+	ContinuousProgram find(String className);
+	ContinuousProgram findByAttributes(String className, String query);
+	Unit save(ContinuousProgram object);
+	Unit delete(ContinuousProgram object);
+	ContinuousProgram update(ContinuousProgram object);
+	String log(String log);
+}
+
+
+[Foreign]
+class ContinuousProgramDbImpl implements ContinuousProgramDb {
+	List<ContinuousProgram> findAllByAttributes(String className, String query) {
+		return Nil;
+	}
+	List<ContinuousProgram> findAll(String className) {
+		return Nil;
+	}
+	ContinuousProgram findByAttributes(String className, String query) {
+		return new local ContinuousProgramImpl();
+	}
+	ContinuousProgram find(String className) {
+		return new local ContinuousProgramImpl();
+	}
+	Unit save(ContinuousProgram object) {
+	}
+	Unit delete(ContinuousProgram object) {
+	}
+	ContinuousProgram update(ContinuousProgram object) {
+		return new local ContinuousProgramImpl();
+	}
+	String log(String log) {
+		return "return log";
+	}
+}

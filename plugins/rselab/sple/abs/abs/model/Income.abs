@@ -1,0 +1,63 @@
+module MIncomeModel;
+export *;
+
+interface Income {
+	Unit setIdIncome(Int id);
+	Int getIdIncome();
+	Unit setDate(String date);
+	String getDate();
+	Unit setIdProgram(Int idProgram);
+	Int getIdProgram();
+	Unit setDescription(String description);
+	String getDescription();
+	Unit setAmount(Int amount);
+	Int getAmount();
+}
+
+class IncomeImpl implements Income {
+	[PK] Int idIncome = 0;
+	String date = "";
+	String description = "";
+	Int amount = 0;
+	Int idProgram = 0;
+
+	Unit setIdIncome(Int idIncome){
+		this.idIncome = idIncome;
+	}
+
+	Int getIdIncome(){
+		return this.idIncome;
+	}
+
+	Unit setIdProgram(Int idProgram){
+        this.idProgram = idProgram;
+    }
+
+    Int getIdProgram(){
+        return this.idProgram;
+    }
+
+	Unit setDate(String date){
+		this.date = date;
+	}
+
+	String getDate(){
+		return this.date;
+	}
+
+	Unit setDescription(String description){
+		this.description = description;
+	}
+
+	String getDescription(){
+		return this.description;
+	}
+
+	Unit setAmount(Int amount){
+		this.amount = amount;
+	}
+
+	Int getAmount(){
+		return this.amount;
+	}
+}

@@ -1,0 +1,44 @@
+// generated abs fli code for AutomaticReportImpl
+module MAutomaticReportDbImpl;
+export AutomaticReportDb,AutomaticReportDbImpl;
+import AutomaticReport,AutomaticReportImpl from MAutomaticReportModel;
+import * from ABS.FLI;
+
+
+interface AutomaticReportDb {
+	List<AutomaticReport> findAll(String className);
+	List<AutomaticReport> findAllByAttributes(String className, String query);
+	AutomaticReport find(String className);
+	AutomaticReport findByAttributes(String className, String query);
+	Unit save(AutomaticReport object);
+	Unit delete(AutomaticReport object);
+	AutomaticReport update(AutomaticReport object);
+	String log(String log);
+}
+
+
+[Foreign]
+class AutomaticReportDbImpl implements AutomaticReportDb {
+	List<AutomaticReport> findAllByAttributes(String className, String query) {
+		return Nil;
+	}
+	List<AutomaticReport> findAll(String className) {
+		return Nil;
+	}
+	AutomaticReport findByAttributes(String className, String query) {
+		return new local AutomaticReportImpl();
+	}
+	AutomaticReport find(String className) {
+		return new local AutomaticReportImpl();
+	}
+	Unit save(AutomaticReport object) {
+	}
+	Unit delete(AutomaticReport object) {
+	}
+	AutomaticReport update(AutomaticReport object) {
+		return new local AutomaticReportImpl();
+	}
+	String log(String log) {
+		return "return log";
+	}
+}

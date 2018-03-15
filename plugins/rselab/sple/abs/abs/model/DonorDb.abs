@@ -1,0 +1,44 @@
+// generated abs fli code for DonorImpl
+module MDonorDbImpl;
+export DonorDb,DonorDbImpl;
+import Donor,DonorImpl from MDonorModel;
+import * from ABS.FLI;
+
+
+interface DonorDb {
+	List<Donor> findAll(String className);
+	List<Donor> findAllByAttributes(String className, String query);
+	Donor find(String className);
+	Donor findByAttributes(String className, String query);
+	Unit save(Donor object);
+	Unit delete(Donor object);
+	Donor update(Donor object);
+	String log(String log);
+}
+
+
+[Foreign]
+class DonorDbImpl implements DonorDb {
+	List<Donor> findAllByAttributes(String className, String query) {
+		return Nil;
+	}
+	List<Donor> findAll(String className) {
+		return Nil;
+	}
+	Donor findByAttributes(String className, String query) {
+		return new local DonorImpl();
+	}
+	Donor find(String className) {
+		return new local DonorImpl();
+	}
+	Unit save(Donor object) {
+	}
+	Unit delete(Donor object) {
+	}
+	Donor update(Donor object) {
+		return new local DonorImpl();
+	}
+	String log(String log) {
+		return "return log";
+	}
+}

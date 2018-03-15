@@ -1,0 +1,107 @@
+module MMoneyDonationController;
+
+import MoneyDonation, MoneyDonationImpl from MMoneyDonationModel;
+import MoneyDonationDb, MoneyDonationDbImpl from MMoneyDonationDbImpl;
+import ABSHttpRequest from ABS.Framework.Http;
+import Utility, UtilityImpl from ABS.Framework.Utility;
+
+interface MoneyDonationController {
+	Pair<String, List<MoneyDonation>> list(ABSHttpRequest request);
+	Pair<String, List<MoneyDonation>> detail(ABSHttpRequest request);
+	Pair<String, List<MoneyDonation>> create(ABSHttpRequest request);
+	Pair<String, List<MoneyDonation>> save(ABSHttpRequest request);
+	Pair<String, List<MoneyDonation>> edit(ABSHttpRequest request);
+	Pair<String, List<MoneyDonation>> update(ABSHttpRequest request);
+	Pair<String, List<MoneyDonation>> delete(ABSHttpRequest request);
+}
+
+class MoneyDonationControllerImpl implements MoneyDonationController {
+	Pair<String, List<MoneyDonation>> list(ABSHttpRequest request) {
+		MoneyDonationDb orm = new local MoneyDonationDbImpl();
+
+		List<MoneyDonation> moneyDonations = orm.findAll("MMoneyDonationModel.MoneyDonationImpl_c");
+
+		return Pair("money-donation/list", moneyDonations);
+	}
+
+	Pair<String, List<MoneyDonation>> detail(ABSHttpRequest request) {
+		String id = request.getInput("idMoneyDonation");
+		String condition = "idMoneyDonation=" + id;
+		MoneyDonationDb orm = new local MoneyDonationDbImpl();
+		MoneyDonation moneyDonation = orm.findByAttributes("MMoneyDonationModel.MoneyDonationImpl_c",condition);
+
+		List<MoneyDonation> dataModel = Nil;
+		dataModel = appendright(dataModel, moneyDonation);
+
+		return Pair("money-donation/detail", dataModel);
+	}
+
+	Pair<String, List<MoneyDonation>> create(ABSHttpRequest request) {
+		return Pair("money-donation/create", Nil);
+	}
+
+	Pair<String, List<MoneyDonation>> save(ABSHttpRequest request) {
+		Utility utility = new local UtilityImpl();
+
+		MoneyDonationDb orm = new local MoneyDonationDbImpl();
+		MoneyDonation moneyDonation = new local MoneyDonationImpl();
+
+		String accountNumber = request.getInput("accountNumber");
+		String amountStr = request.getInput("amount");
+		Int amount = utility.stringToInteger(amountStr);
+		String idProgramStr = request.getInput("idProgram");
+		Int idProgram = utility.stringToInteger(idProgramStr);
+
+		moneyDonation.setAccountNumber(accountNumber);
+		moneyDonation.setAmount(amount);
+		moneyDonation.setIdProgram(idProgram);
+		orm.save(moneyDonation);
+
+		return this.list(request);
+	}
+
+	Pair<String, List<MoneyDonation>> edit(ABSHttpRequest request) {
+		String id = request.getInput("idMoneyDonation");
+		String condition = "idMoneyDonation=" + id;
+		MoneyDonationDb orm = new local MoneyDonationDbImpl();
+		MoneyDonation moneyDonation = orm.findByAttributes("MMoneyDonationModel.MoneyDonationImpl_c", condition);
+
+		List<MoneyDonation> dataModel = Nil;
+		dataModel = appendright(dataModel, moneyDonation);
+		return Pair("money-donation/edit", dataModel);
+	}
+
+	Pair<String, List<MoneyDonation>> update(ABSHttpRequest request) {
+		Utility utility = new local UtilityImpl();
+
+		String id = request.getInput("idMoneyDonation");
+		String condition = "idMoneyDonation=" + id;
+		MoneyDonationDb orm = new local MoneyDonationDbImpl();
+		MoneyDonation moneyDonation = orm.findByAttributes("MMoneyDonationModel.MoneyDonationImpl_c",condition);
+
+		String accountNumber = request.getInput("accountNumber");
+		String amountStr = request.getInput("amount");
+		Int amount = utility.stringToInteger(amountStr);
+		String idProgramStr = request.getInput("idProgram");
+		Int idProgram = utility.stringToInteger(idProgramStr);
+
+		moneyDonation.setAccountNumber(accountNumber);
+		moneyDonation.setAmount(amount);
+		moneyDonation.setIdProgram(idProgram);
+		orm.update(moneyDonation);
+
+		return this.detail(request);
+	}
+
+	Pair<String, List<MoneyDonation>> delete(ABSHttpRequest request) {
+		String id = request.getInput("idMoneyDonation");
+		String condition = "idMoneyDonation=" + id;
+		MoneyDonationDb orm = new local MoneyDonationDbImpl();
+		MoneyDonation moneyDonation = orm.findByAttributes("MMoneyDonationModel.MoneyDonationImpl_c", condition);
+
+		orm.delete(moneyDonation);
+
+		return this.list(request);
+	}
+}
+

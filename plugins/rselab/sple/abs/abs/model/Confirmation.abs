@@ -1,0 +1,29 @@
+module MConfirmationModel;
+export *;
+
+interface Confirmation {
+    Int getIdConfirmation();
+    Unit setIdConfirmation(Int idConfirmation);
+    Int getIdProgram();
+    Unit setIdProgram(Int idProgram);
+    String getAccountNumber();
+    Unit setAccountNumber(String accountNumber);
+    Int getAmount();
+    Unit setAmount(Int amount);
+}
+
+class ConfirmationImpl implements Confirmation {
+    [PK] Int idConfirmation = 0;
+    Int idProgram = 0;
+    String accountNumber = "";
+    Int amount = 0;
+
+    Int getIdConfirmation() { return this.idConfirmation; }
+    Unit setIdConfirmation(Int idConfirmation) { this.idConfirmation = idConfirmation; }
+    Int getIdProgram() { return this.idProgram; }
+    Unit setIdProgram(Int idProgram) { this.idProgram = idProgram; }
+    String getAccountNumber() { return this.accountNumber; }
+    Unit setAccountNumber(String accountNumber) { this.accountNumber = accountNumber; }
+    Int getAmount() { return this.amount; }
+    Unit setAmount(Int amount) { this.amount = amount; }
+}

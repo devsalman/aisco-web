@@ -1,0 +1,108 @@
+module MExpenseController;
+
+import Expense, ExpenseImpl from MExpenseModel;
+import ExpenseDb, ExpenseDbImpl from MExpenseDbImpl;
+import ABSHttpRequest from ABS.Framework.Http;
+import Utility, UtilityImpl from ABS.Framework.Utility;
+
+interface ExpenseController{
+	Pair<String, List<Expense>> list(ABSHttpRequest request);
+	Pair<String, List<Expense>> detail(ABSHttpRequest request);
+	Pair<String, List<Expense>> create(ABSHttpRequest request);
+	Pair<String, List<Expense>> save(ABSHttpRequest request);
+	Pair<String, List<Expense>> edit(ABSHttpRequest request);
+	Pair<String, List<Expense>> update(ABSHttpRequest request);
+	Pair<String, List<Expense>> delete(ABSHttpRequest request);
+}
+
+class ExpenseControllerImpl {
+    Pair<String, List<Expense>> list(ABSHttpRequest request) {
+	    ExpenseDb orm = new local ExpenseDbImpl();
+
+        List<Expense> expenses = orm.findAll("MExpenseModel.ExpenseImpl_c");
+
+		return Pair("expense/list", expenses);
+	}
+
+    Pair<String, List<Expense>> detail(ABSHttpRequest request) {
+        String id = request.getInput("idExpense");
+        String condition = "idExpense=" + id;
+        ExpenseDb orm = new local ExpenseDbImpl();
+        Expense expense = orm.findByAttributes("MExpenseModel.ExpenseImpl_c",condition);
+
+        List<Expense> dataModel = Nil;
+		dataModel = appendright(dataModel, expense);
+
+        return Pair("expense/detail", dataModel);
+    }
+
+	Pair<String, List<Expense>> create(ABSHttpRequest request) {
+	    return Pair("expense/create", Nil);
+	}
+
+	Pair<String, List<Expense>> save(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        ExpenseDb orm = new local ExpenseDbImpl();
+        Expense expense = new local ExpenseImpl();
+
+        String date = request.getInput("date");
+        String description = request.getInput("description");
+        String amountStr = request.getInput("amount");
+        Int amount = utility.stringToInteger(amountStr);
+        String idProgramStr = request.getInput("idProgram");
+        Int idProgram = utility.stringToInteger(idProgramStr);
+
+        expense.setDate(date);
+        expense.setDescription(description);
+        expense.setAmount(amount);
+        expense.setIdProgram(idProgram);
+        orm.save(expense);
+
+        return this.list(request);
+    }
+
+	Pair<String, List<Expense>> edit(ABSHttpRequest request) {
+        String id = request.getInput("idExpense");
+        String condition = "idExpense=" + id;
+        ExpenseDb orm = new local ExpenseDbImpl();
+        Expense expense = orm.findByAttributes("MExpenseModel.ExpenseImpl_c", condition);
+
+        List<Expense> dataModel = Nil;
+        dataModel = appendright(dataModel, expense);
+        return Pair("expense/edit", dataModel);
+	}
+
+	Pair<String, List<Expense>> update(ABSHttpRequest request) {
+	    Utility utility = new local UtilityImpl();
+
+        String id = request.getInput("idExpense");
+        String condition = "idExpense=" + id;
+        ExpenseDb orm = new local ExpenseDbImpl();
+        Expense expense = orm.findByAttributes("MExpenseModel.ExpenseImpl_c",condition);
+
+  		String date = request.getInput("date");
+        String description = request.getInput("description");
+        String amountStr = request.getInput("amount");
+        Int amount = utility.stringToInteger(amountStr);
+        String idProgramStr = request.getInput("idProgram");
+        Int idProgram = utility.stringToInteger(idProgramStr);
+
+        expense.setDate(date);
+        expense.setDescription(description);
+        expense.setAmount(amount);
+        expense.setIdProgram(idProgram);
+        orm.update(expense);
+        return this.detail(request);
+    }
+
+	Pair<String, List<Expense>> delete(ABSHttpRequest request) {
+        String id = request.getInput("idExpense");
+        String condition = "idExpense=" + id;
+        ExpenseDb orm = new local ExpenseDbImpl();
+        Expense expense = orm.findByAttributes("MExpenseModel.ExpenseImpl_c", condition);
+
+        orm.delete(expense);
+        return this.list(request);
+    }
+}

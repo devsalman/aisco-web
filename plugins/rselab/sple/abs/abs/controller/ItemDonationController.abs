@@ -1,0 +1,107 @@
+module MItemDonationController;
+
+import ItemDonation, ItemDonationImpl from MItemDonationModel;
+import ItemDonationDb, ItemDonationDbImpl from MItemDonationDbImpl;
+import ABSHttpRequest from ABS.Framework.Http;
+import Utility, UtilityImpl from ABS.Framework.Utility;
+
+interface ItemDonationController {
+	Pair<String, List<ItemDonation>> list(ABSHttpRequest request);
+	Pair<String, List<ItemDonation>> detail(ABSHttpRequest request);
+	Pair<String, List<ItemDonation>> create(ABSHttpRequest request);
+	Pair<String, List<ItemDonation>> save(ABSHttpRequest request);
+	Pair<String, List<ItemDonation>> edit(ABSHttpRequest request);
+	Pair<String, List<ItemDonation>> update(ABSHttpRequest request);
+	Pair<String, List<ItemDonation>> delete(ABSHttpRequest request);
+}
+
+class ItemDonationControllerImpl implements ItemDonationController {
+	Pair<String, List<ItemDonation>> list(ABSHttpRequest request) {
+		ItemDonationDb orm = new local ItemDonationDbImpl();
+
+		List<ItemDonation> itemDonations = orm.findAll("MItemDonationModel.ItemDonationImpl_c");
+
+		return Pair("item-donation/list", itemDonations);
+	}
+
+	Pair<String, List<ItemDonation>> detail(ABSHttpRequest request) {
+		String id = request.getInput("idItemDonation");
+		String condition = "idItemDonation=" + id;
+		ItemDonationDb orm = new local ItemDonationDbImpl();
+		ItemDonation itemDonation = orm.findByAttributes("MItemDonationModel.ItemDonationImpl_c",condition);
+
+		List<ItemDonation> dataModel = Nil;
+		dataModel = appendright(dataModel, itemDonation);
+
+		return Pair("item-donation/detail", dataModel);
+	}
+
+	Pair<String, List<ItemDonation>> create(ABSHttpRequest request) {
+		return Pair("item-donation/create", Nil);
+	}
+
+	Pair<String, List<ItemDonation>> save(ABSHttpRequest request) {
+		Utility utility = new local UtilityImpl();
+
+		ItemDonationDb orm = new local ItemDonationDbImpl();
+		ItemDonation itemDonation = new local ItemDonationImpl();
+
+		String itemName = request.getInput("itemName");
+		String quantityStr = request.getInput("quantity");
+		Int quantity = utility.stringToInteger(quantityStr);
+		String idProgramStr = request.getInput("idProgram");
+		Int idProgram = utility.stringToInteger(idProgramStr);
+
+		itemDonation.setItemName(itemName);
+		itemDonation.setQuantity(quantity);
+		itemDonation.setIdProgram(idProgram);
+		orm.save(itemDonation);
+
+		return this.list(request);
+	}
+
+	Pair<String, List<ItemDonation>> edit(ABSHttpRequest request) {
+		String id = request.getInput("idItemDonation");
+		String condition = "idItemDonation=" + id;
+		ItemDonationDb orm = new local ItemDonationDbImpl();
+		ItemDonation itemDonation = orm.findByAttributes("MItemDonationModel.ItemDonationImpl_c", condition);
+
+		List<ItemDonation> dataModel = Nil;
+		dataModel = appendright(dataModel, itemDonation);
+		return Pair("item-donation/edit", dataModel);
+	}
+
+	Pair<String, List<ItemDonation>> update(ABSHttpRequest request) {
+		Utility utility = new local UtilityImpl();
+
+		String id = request.getInput("idItemDonation");
+		String condition = "idItemDonation=" + id;
+		ItemDonationDb orm = new local ItemDonationDbImpl();
+		ItemDonation itemDonation = orm.findByAttributes("MItemDonationModel.ItemDonationImpl_c",condition);
+
+		String itemName = request.getInput("itemName");
+		String quantityStr = request.getInput("quantity");
+		Int quantity = utility.stringToInteger(quantityStr);
+		String idProgramStr = request.getInput("idProgram");
+		Int idProgram = utility.stringToInteger(idProgramStr);
+
+		itemDonation.setItemName(itemName);
+		itemDonation.setQuantity(quantity);
+		itemDonation.setIdProgram(idProgram);
+		orm.update(itemDonation);
+
+		return this.detail(request);
+	}
+
+	Pair<String, List<ItemDonation>> delete(ABSHttpRequest request) {
+		String id = request.getInput("idItemDonation");
+		String condition = "idItemDonation=" + id;
+		ItemDonationDb orm = new local ItemDonationDbImpl();
+		ItemDonation itemDonation = orm.findByAttributes("MItemDonationModel.ItemDonationImpl_c", condition);
+
+		orm.delete(itemDonation);
+
+		return this.list(request);
+	}
+}
+

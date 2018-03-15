@@ -7,7 +7,8 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            'RseLab\Sple\Components\SpleProducts' => 'spleProducts'
+            'RseLab\Sple\Components\SpleProducts' => 'spleProducts',
+            'RseLab\Sple\Components\ProductConfigurations' => 'productConfigurations',
         ];
     }
 

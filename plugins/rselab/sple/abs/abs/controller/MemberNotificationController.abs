@@ -1,0 +1,113 @@
+module MMemberNotificationController;
+import MemberNotification, MemberNotificationImpl from MMemberNotificationModel;
+import MemberNotificationDb, MemberNotificationDbImpl from MMemberNotificationDbImpl;
+import ABSHttpRequest from ABS.Framework.Http;
+import Utility, UtilityImpl from ABS.Framework.Utility;
+
+interface MemberNotificationController
+{
+    Pair<String, List<MemberNotification>> list(ABSHttpRequest request);
+    Pair<String, List<MemberNotification>> detail(ABSHttpRequest request);
+    Pair<String, List<MemberNotification>> create(ABSHttpRequest request);
+    Pair<String, List<MemberNotification>> save(ABSHttpRequest request);
+    Pair<String, List<MemberNotification>> edit(ABSHttpRequest request);
+    Pair<String, List<MemberNotification>> update(ABSHttpRequest request);
+    Pair<String, List<MemberNotification>> delete(ABSHttpRequest request);
+}
+
+class MemberNotificationControllerImpl implements MemberNotificationController {
+    Pair<String, List<MemberNotification>> list(ABSHttpRequest request) {
+        MemberNotificationDb orm = new local MemberNotificationDbImpl();
+
+        List<MemberNotification> memberNotifications = orm.findAll("MMemberNotificationModel.MemberNotificationImpl_c");
+
+        return Pair("member-notification/list", memberNotifications);
+    }
+
+    Pair<String, List<MemberNotification>> detail(ABSHttpRequest request) {
+        String id = request.getInput("idMemberNotification");
+        String condition = "idMemberNotification=" + id;
+        MemberNotificationDb orm = new local MemberNotificationDbImpl();
+        MemberNotification memberNotification = orm.findByAttributes("MMemberNotificationModel.MemberNotificationImpl_c",condition);
+
+        List<MemberNotification> dataModel = Nil;
+        dataModel = appendright(dataModel, memberNotification);
+
+        return Pair("member-notification/detail", dataModel);
+    }
+
+    Pair<String, List<MemberNotification>> create(ABSHttpRequest request) {
+        return Pair("member-notification/create", Nil);
+    }
+
+    Pair<String, List<MemberNotification>> save(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        MemberNotificationDb orm = new local MemberNotificationDbImpl();
+        MemberNotification memberNotification = new local MemberNotificationImpl();
+
+        String title = request.getInput("title");
+        String content = request.getInput("content");
+        String publishDate = request.getInput("publishDate");
+        String thumbnailUrl = request.getInput("thumbnailUrl");
+        String idDonorStr = request.getInput("idDonor");
+        Int idDonor = utility.stringToInteger(idDonorStr);
+
+        memberNotification.setTitle(title);
+        memberNotification.setContent(content);
+        memberNotification.setPublishDate(publishDate);
+        memberNotification.setThumbnailUrl(thumbnailUrl);
+        memberNotification.setIdDonor(idDonor);
+        orm.save(memberNotification);
+
+        return this.list(request);
+    }
+
+    Pair<String, List<MemberNotification>> edit(ABSHttpRequest request) {
+        String id = request.getInput("idMemberNotification");
+        String condition = "idMemberNotification=" + id;
+        MemberNotificationDb orm = new local MemberNotificationDbImpl();
+        MemberNotification memberNotification = orm.findByAttributes("MMemberNotificationModel.MemberNotificationImpl_c", condition);
+
+        List<MemberNotification> dataModel = Nil;
+        dataModel = appendright(dataModel, memberNotification);
+        return Pair("member-notification/edit", dataModel);
+    }
+
+    Pair<String, List<MemberNotification>> update(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        String id = request.getInput("idMemberNotification");
+        String condition = "idMemberNotification=" + id;
+        MemberNotificationDb orm = new local MemberNotificationDbImpl();
+        MemberNotification memberNotification = orm.findByAttributes("MMemberNotificationModel.MemberNotificationImpl_c",condition);
+
+        String title = request.getInput("title");
+        String content = request.getInput("content");
+        String publishDate = request.getInput("publishDate");
+        String thumbnailUrl = request.getInput("thumbnailUrl");
+        String idDonorStr = request.getInput("idDonor");
+        Int idDonor = utility.stringToInteger(idDonorStr);
+
+        memberNotification.setTitle(title);
+        memberNotification.setContent(content);
+        memberNotification.setPublishDate(publishDate);
+        memberNotification.setThumbnailUrl(thumbnailUrl);
+        memberNotification.setIdDonor(idDonor);
+        orm.update(memberNotification);
+
+        return this.detail(request);
+    }
+
+    Pair<String, List<MemberNotification>> delete(ABSHttpRequest request) {
+        String id = request.getInput("idMemberNotification");
+        String condition = "idMemberNotification=" + id;
+        MemberNotificationDb orm = new local MemberNotificationDbImpl();
+        MemberNotification memberNotification = orm.findByAttributes("MMemberNotificationModel.MemberNotificationImpl_c", condition);
+
+        orm.delete(memberNotification);
+
+        return this.list(request);
+    }
+}
+

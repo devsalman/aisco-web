@@ -1,0 +1,39 @@
+module MAutomaticReportModel;
+export *;
+
+interface AutomaticReport {
+    Int getIdAutomaticReport();
+    Unit setIdAutomaticReport(Int idAutomaticReport);
+    Int getIdSummary();
+    Unit setIdSummary(Int idSummary);
+    String getTitle();
+    Unit setTitle(String title);
+    String getContent();
+    Unit setContent(String content);
+    String getPublishDate();
+    Unit setPublishDate(String publishDate);
+    String getThumbnailUrl();
+    Unit setThumbnailUrl(String thumbnailUrl);
+}
+
+class AutomaticReportImpl implements AutomaticReport {
+    [PK] Int idAutomaticReport = 0;
+    Int idSummary = 0;
+    String title = "";
+    String content = "";
+    String publishDate = "";
+    String thumbnailUrl = "";
+
+    Int getIdAutomaticReport() { return this.idAutomaticReport; }
+    Unit setIdAutomaticReport(Int idAutomaticReport) { this.idAutomaticReport = idAutomaticReport; }
+    Int getIdSummary() { return this.idSummary; }
+    Unit setIdSummary(Int idSummary) { this.idSummary = idSummary; }
+    String getTitle() { return this.title; }
+    Unit setTitle(String title) { this.title = title; }
+    String getContent() { return this.content; }
+    Unit setContent(String content) { this.content = content; }
+    String getPublishDate() { return this.publishDate; }
+    Unit setPublishDate(String publishDate) { this.publishDate = publishDate; }
+    String getThumbnailUrl() { return this.thumbnailUrl; }
+    Unit setThumbnailUrl(String thumbnailUrl) { this.thumbnailUrl = thumbnailUrl; }
+}

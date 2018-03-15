@@ -1,0 +1,113 @@
+module MStoryBoardController;
+import StoryBoard, StoryBoardImpl from MStoryBoardModel;
+import StoryBoardDb, StoryBoardDbImpl from MStoryBoardDbImpl;
+import ABSHttpRequest from ABS.Framework.Http;
+import Utility, UtilityImpl from ABS.Framework.Utility;
+
+interface StoryBoardController
+{
+	Pair<String, List<StoryBoard>> list(ABSHttpRequest request);
+    Pair<String, List<StoryBoard>> detail(ABSHttpRequest request);
+    Pair<String, List<StoryBoard>> create(ABSHttpRequest request);
+    Pair<String, List<StoryBoard>> save(ABSHttpRequest request);
+    Pair<String, List<StoryBoard>> edit(ABSHttpRequest request);
+    Pair<String, List<StoryBoard>> update(ABSHttpRequest request);
+    Pair<String, List<StoryBoard>> delete(ABSHttpRequest request);
+}
+
+class StoryBoardControllerImpl implements StoryBoardController {
+    Pair<String, List<StoryBoard>> list(ABSHttpRequest request) {
+        StoryBoardDb orm = new local StoryBoardDbImpl();
+
+        List<StoryBoard> storyBoards = orm.findAll("MStoryBoardModel.StoryBoardImpl_c");
+
+        return Pair("story-board/list", storyBoards);
+    }
+
+    Pair<String, List<StoryBoard>> detail(ABSHttpRequest request) {
+        String id = request.getInput("idStoryBoard");
+        String condition = "idStoryBoard=" + id;
+        StoryBoardDb orm = new local StoryBoardDbImpl();
+        StoryBoard storyBoard = orm.findByAttributes("MStoryBoardModel.StoryBoardImpl_c",condition);
+
+        List<StoryBoard> dataModel = Nil;
+        dataModel = appendright(dataModel, storyBoard);
+
+        return Pair("story-board/detail", dataModel);
+    }
+
+    Pair<String, List<StoryBoard>> create(ABSHttpRequest request) {
+        return Pair("story-board/create", Nil);
+    }
+
+    Pair<String, List<StoryBoard>> save(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        StoryBoardDb orm = new local StoryBoardDbImpl();
+        StoryBoard storyBoard = new local StoryBoardImpl();
+
+        String title = request.getInput("title");
+        String content = request.getInput("content");
+        String publishDate = request.getInput("publishDate");
+        String thumbnailUrl = request.getInput("thumbnailUrl");
+        String idProgramStr = request.getInput("idProgram");
+        Int idProgram = utility.stringToInteger(idProgramStr);
+
+        storyBoard.setTitle(title);
+        storyBoard.setContent(content);
+        storyBoard.setPublishDate(publishDate);
+        storyBoard.setThumbnailUrl(thumbnailUrl);
+        storyBoard.setIdProgram(idProgram);
+        orm.save(storyBoard);
+
+        return this.list(request);
+    }
+
+    Pair<String, List<StoryBoard>> edit(ABSHttpRequest request) {
+        String id = request.getInput("idStoryBoard");
+        String condition = "idStoryBoard=" + id;
+        StoryBoardDb orm = new local StoryBoardDbImpl();
+        StoryBoard storyBoard = orm.findByAttributes("MStoryBoardModel.StoryBoardImpl_c", condition);
+
+        List<StoryBoard> dataModel = Nil;
+        dataModel = appendright(dataModel, storyBoard);
+        return Pair("story-board/edit", dataModel);
+    }
+
+    Pair<String, List<StoryBoard>> update(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        String id = request.getInput("idStoryBoard");
+        String condition = "idStoryBoard=" + id;
+        StoryBoardDb orm = new local StoryBoardDbImpl();
+        StoryBoard storyBoard = orm.findByAttributes("MStoryBoardModel.StoryBoardImpl_c",condition);
+
+        String title = request.getInput("title");
+        String content = request.getInput("content");
+        String publishDate = request.getInput("publishDate");
+        String thumbnailUrl = request.getInput("thumbnailUrl");
+        String idProgramStr = request.getInput("idProgram");
+        Int idProgram = utility.stringToInteger(idProgramStr);
+
+        storyBoard.setTitle(title);
+        storyBoard.setContent(content);
+        storyBoard.setPublishDate(publishDate);
+        storyBoard.setThumbnailUrl(thumbnailUrl);
+        storyBoard.setIdProgram(idProgram);
+        orm.update(storyBoard);
+
+        return this.detail(request);
+    }
+
+    Pair<String, List<StoryBoard>> delete(ABSHttpRequest request) {
+        String id = request.getInput("idStoryBoard");
+        String condition = "idStoryBoard=" + id;
+        StoryBoardDb orm = new local StoryBoardDbImpl();
+        StoryBoard storyBoard = orm.findByAttributes("MStoryBoardModel.StoryBoardImpl_c", condition);
+
+        orm.delete(storyBoard);
+
+        return this.list(request);
+    }
+}
+

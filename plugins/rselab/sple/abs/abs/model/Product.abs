@@ -1,0 +1,41 @@
+module MProductModel;
+export *;
+
+interface Product {
+	Unit setIdProduct(Int id);
+	Int getIdProduct();
+	Unit setName(String name);
+	String getName();
+	Unit setDescription(String description);
+    String getDescription();
+}
+
+class ProductImpl implements Product {
+	[PK] Int idProduct = 0;
+	String name = "";
+	String description = "";
+
+	Unit setIdProduct(Int idProduct){
+		this.idProduct = idProduct;
+	}
+
+	Int getIdProduct(){
+		return this.idProduct;
+	}
+
+	Unit setName(String name){
+		this.name = name;
+	}
+
+	String getName(){
+		return this.name;
+	}
+
+	Unit setDescription(String description){
+        this.description = description;
+    }
+
+    String getDescription(){
+        return this.description;
+    }
+}

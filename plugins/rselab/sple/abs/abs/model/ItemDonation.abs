@@ -1,0 +1,29 @@
+module MItemDonationModel;
+export *;
+
+interface ItemDonation {
+	Int getIdItemDonation();
+	Unit setIdItemDonation(Int idItemDonation);
+	Int getIdProgram();
+	Unit setIdProgram(Int idProgram);
+	String getItemName();
+	Unit setItemName(String itemName);
+    Int getQuantity();
+    Unit setQuantity(Int quantity);
+}
+
+class ItemDonationImpl implements ItemDonation {
+	[PK] Int idItemDonation = 0;
+	Int idProgram = 0;
+	String itemName = "";
+	Int quantity = 0;
+
+	Int getIdItemDonation() { return this.idItemDonation; }
+    Unit setIdItemDonation(Int idItemDonation) { this.idItemDonation = idItemDonation; }
+    Int getIdProgram() { return this.idProgram; }
+    Unit setIdProgram(Int idProgram) { this.idProgram = idProgram; }
+    String getItemName() { return this.itemName; }
+    Unit setItemName(String itemName) { this.itemName = itemName; }
+    Int getQuantity() { return this.quantity; }
+    Unit setQuantity(Int quantity) { this.quantity = quantity; }
+}

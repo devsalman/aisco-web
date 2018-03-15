@@ -1,0 +1,41 @@
+module MIndividualBeneficiaryModel;
+export *;
+
+interface IndividualBeneficiary {
+	Unit setIdIndividualBeneficiary(Int id);
+	Int getIdIndividualBeneficiary();
+	Unit setName(String name);
+	String getName();
+    Unit setAddress(String address);
+    String getAddress();
+}
+
+class IndividualBeneficiaryImpl implements IndividualBeneficiary {
+	[PK] Int idIndividualBeneficiary = 0;
+	String name = "";
+	String address = "";
+
+	Unit setIdIndividualBeneficiary(Int idIndividualBeneficiary){
+		this.idIndividualBeneficiary = idIndividualBeneficiary;
+	}
+
+	Int getIdIndividualBeneficiary(){
+		return this.idIndividualBeneficiary;
+	}
+
+	Unit setName(String name){
+		this.name = name;
+	}
+
+	String getName(){
+		return this.name;
+	}
+
+    Unit setAddress(String address){
+        this.address = address;
+    }
+
+    String getAddress(){
+        return this.address;
+    }
+}

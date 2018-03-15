@@ -1,0 +1,116 @@
+module MEventController;
+import Event, EventImpl from MEventModel;
+import EventDb, EventDbImpl from MEventDbImpl;
+import ABSHttpRequest from ABS.Framework.Http;
+import Utility, UtilityImpl from ABS.Framework.Utility;
+
+interface EventController
+{
+    Pair<String, List<Event>> list(ABSHttpRequest request);
+    Pair<String, List<Event>> detail(ABSHttpRequest request);
+    Pair<String, List<Event>> create(ABSHttpRequest request);
+    Pair<String, List<Event>> save(ABSHttpRequest request);
+    Pair<String, List<Event>> edit(ABSHttpRequest request);
+    Pair<String, List<Event>> update(ABSHttpRequest request);
+    Pair<String, List<Event>> delete(ABSHttpRequest request);
+}
+
+class EventControllerImpl implements EventController
+{
+    Pair<String, List<Event>> list(ABSHttpRequest request) {
+        EventDb orm = new local EventDbImpl();
+
+        List<Event> events = orm.findAll("MEventModel.EventImpl_c");
+
+        return Pair("event/list", events);
+    }
+
+    Pair<String, List<Event>> detail(ABSHttpRequest request) {
+        String id = request.getInput("idEvent");
+        String condition = "idEvent=" + id;
+        EventDb orm = new local EventDbImpl();
+        Event event = orm.findByAttributes("MEventModel.EventImpl_c",condition);
+
+        List<Event> dataModel = Nil;
+        dataModel = appendright(dataModel, event);
+
+        return Pair("event/detail", dataModel);
+    }
+
+    Pair<String, List<Event>> create(ABSHttpRequest request) {
+        return Pair("event/create", Nil);
+    }
+
+    Pair<String, List<Event>> save(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        EventDb orm = new local EventDbImpl();
+        Event event = new local EventImpl();
+
+        String name = request.getInput("name");
+        String description = request.getInput("description");
+        String date = request.getInput("date");
+        String partner = request.getInput("partner");
+        String target = request.getInput("target");
+        String logoUrl = request.getInput("logoUrl");
+
+        event.setName(name);
+        event.setDescription(description);
+        event.setDate(date);
+        event.setPartner(partner);
+        event.setTarget(target);
+        event.setLogoUrl(logoUrl);
+        orm.save(event);
+
+        return this.list(request);
+    }
+
+    Pair<String, List<Event>> edit(ABSHttpRequest request) {
+        String id = request.getInput("idEvent");
+        String condition = "idEvent=" + id;
+        EventDb orm = new local EventDbImpl();
+        Event event = orm.findByAttributes("MEventModel.EventImpl_c", condition);
+
+        List<Event> dataModel = Nil;
+        dataModel = appendright(dataModel, event);
+        return Pair("event/edit", dataModel);
+    }
+
+    Pair<String, List<Event>> update(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        String id = request.getInput("idEvent");
+        String condition = "idEvent=" + id;
+        EventDb orm = new local EventDbImpl();
+        Event event = orm.findByAttributes("MEventModel.EventImpl_c",condition);
+
+        String name = request.getInput("name");
+        String description = request.getInput("description");
+        String date = request.getInput("date");
+        String partner = request.getInput("partner");
+        String target = request.getInput("target");
+        String logoUrl = request.getInput("logoUrl");
+
+        event.setName(name);
+        event.setDescription(description);
+        event.setDate(date);
+        event.setPartner(partner);
+        event.setTarget(target);
+        event.setLogoUrl(logoUrl);
+        orm.update(event);
+
+        return this.detail(request);
+    }
+
+    Pair<String, List<Event>> delete(ABSHttpRequest request) {
+        String id = request.getInput("idEvent");
+        String condition = "idEvent=" + id;
+        EventDb orm = new local EventDbImpl();
+        Event event = orm.findByAttributes("MEventModel.EventImpl_c", condition);
+
+        orm.delete(event);
+
+        return this.list(request);
+    }
+}
+

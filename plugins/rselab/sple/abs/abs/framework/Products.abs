@@ -1,0 +1,12 @@
+product SekolahBermainMatahari (
+ProgramData, Eventual,
+PublicationSystem, MemberNotification, StoryBoard,
+FinancialReport, Income, Expense, Donor);
+
+product PKPU (
+ProgramData, Periodic, Eventual, Continuous,
+PublicationSystem, StoryBoard, AutomaticReport,
+FinancialReport, Summary, Donor,
+ObjectiveTarget, Product,InstitutionalBeneficiary);
+
+product RSELAB(Donor,Periodic,Continuous,Eventual,StoryBoard);

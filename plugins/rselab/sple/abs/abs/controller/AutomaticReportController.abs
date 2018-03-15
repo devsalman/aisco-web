@@ -1,0 +1,113 @@
+module MAutomaticReportController;
+import AutomaticReport, AutomaticReportImpl from MAutomaticReportModel;
+import AutomaticReportDb, AutomaticReportDbImpl from MAutomaticReportDbImpl;
+import ABSHttpRequest from ABS.Framework.Http;
+import Utility, UtilityImpl from ABS.Framework.Utility;
+
+interface AutomaticReportController
+{
+    Pair<String, List<AutomaticReport>> list(ABSHttpRequest request);
+    Pair<String, List<AutomaticReport>> detail(ABSHttpRequest request);
+    Pair<String, List<AutomaticReport>> create(ABSHttpRequest request);
+    Pair<String, List<AutomaticReport>> save(ABSHttpRequest request);
+    Pair<String, List<AutomaticReport>> edit(ABSHttpRequest request);
+    Pair<String, List<AutomaticReport>> update(ABSHttpRequest request);
+    Pair<String, List<AutomaticReport>> delete(ABSHttpRequest request);
+}
+
+class AutomaticReportControllerImpl implements AutomaticReportController {
+    Pair<String, List<AutomaticReport>> list(ABSHttpRequest request) {
+        AutomaticReportDb orm = new local AutomaticReportDbImpl();
+
+        List<AutomaticReport> automaticReports = orm.findAll("MAutomaticReportModel.AutomaticReportImpl_c");
+
+        return Pair("automatic-report/list", automaticReports);
+    }
+
+    Pair<String, List<AutomaticReport>> detail(ABSHttpRequest request) {
+        String id = request.getInput("idAutomaticReport");
+        String condition = "idAutomaticReport=" + id;
+        AutomaticReportDb orm = new local AutomaticReportDbImpl();
+        AutomaticReport automaticReport = orm.findByAttributes("MAutomaticReportModel.AutomaticReportImpl_c",condition);
+
+        List<AutomaticReport> dataModel = Nil;
+        dataModel = appendright(dataModel, automaticReport);
+
+        return Pair("automatic-report/detail", dataModel);
+    }
+
+    Pair<String, List<AutomaticReport>> create(ABSHttpRequest request) {
+        return Pair("automatic-report/create", Nil);
+    }
+
+    Pair<String, List<AutomaticReport>> save(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        AutomaticReportDb orm = new local AutomaticReportDbImpl();
+        AutomaticReport automaticReport = new local AutomaticReportImpl();
+
+        String title = request.getInput("title");
+        String content = request.getInput("content");
+        String publishDate = request.getInput("publishDate");
+        String thumbnailUrl = request.getInput("thumbnailUrl");
+        String idSummaryStr = request.getInput("idSummary");
+        Int idSummary = utility.stringToInteger(idSummaryStr);
+
+        automaticReport.setTitle(title);
+        automaticReport.setContent(content);
+        automaticReport.setPublishDate(publishDate);
+        automaticReport.setThumbnailUrl(thumbnailUrl);
+        automaticReport.setIdSummary(idSummary);
+        orm.save(automaticReport);
+
+        return this.list(request);
+    }
+
+    Pair<String, List<AutomaticReport>> edit(ABSHttpRequest request) {
+        String id = request.getInput("idAutomaticReport");
+        String condition = "idAutomaticReport=" + id;
+        AutomaticReportDb orm = new local AutomaticReportDbImpl();
+        AutomaticReport automaticReport = orm.findByAttributes("MAutomaticReportModel.AutomaticReportImpl_c", condition);
+
+        List<AutomaticReport> dataModel = Nil;
+        dataModel = appendright(dataModel, automaticReport);
+        return Pair("automatic-report/edit", dataModel);
+    }
+
+    Pair<String, List<AutomaticReport>> update(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        String id = request.getInput("idAutomaticReport");
+        String condition = "idAutomaticReport=" + id;
+        AutomaticReportDb orm = new local AutomaticReportDbImpl();
+        AutomaticReport automaticReport = orm.findByAttributes("MAutomaticReportModel.AutomaticReportImpl_c",condition);
+
+        String title = request.getInput("title");
+        String content = request.getInput("content");
+        String publishDate = request.getInput("publishDate");
+        String thumbnailUrl = request.getInput("thumbnailUrl");
+        String idSummaryStr = request.getInput("idSummary");
+        Int idSummary = utility.stringToInteger(idSummaryStr);
+
+        automaticReport.setTitle(title);
+        automaticReport.setContent(content);
+        automaticReport.setPublishDate(publishDate);
+        automaticReport.setThumbnailUrl(thumbnailUrl);
+        automaticReport.setIdSummary(idSummary);
+        orm.update(automaticReport);
+
+        return this.detail(request);
+    }
+
+    Pair<String, List<AutomaticReport>> delete(ABSHttpRequest request) {
+        String id = request.getInput("idAutomaticReport");
+        String condition = "idAutomaticReport=" + id;
+        AutomaticReportDb orm = new local AutomaticReportDbImpl();
+        AutomaticReport automaticReport = orm.findByAttributes("MAutomaticReportModel.AutomaticReportImpl_c", condition);
+
+        orm.delete(automaticReport);
+
+        return this.list(request);
+    }
+}
+

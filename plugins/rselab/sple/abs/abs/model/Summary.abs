@@ -1,0 +1,74 @@
+module MSummaryModel;
+export *;
+
+interface Summary {
+	Unit setIdSummary(Int id);
+	Int getIdSummary();
+	Unit setDate(String date);
+	String getDate();
+	Unit setIdProgram(Int idProgram);
+	Int getIdProgram();
+	Unit setDescription(String description);
+	String getDescription();
+	Unit setIncome(Int income);
+	Int getIncome();
+	Unit setExpense(Int expense);
+    Int getExpense();
+}
+
+class SummaryImpl implements Summary {
+	[PK] Int idSummary = 0;
+	String date = "";
+	String description = "";
+	Int income = 0;
+	Int expense = 0;
+	Int idProgram = 0;
+
+	Unit setIdSummary(Int idSummary){
+		this.idSummary = idSummary;
+	}
+
+	Int getIdSummary(){
+		return this.idSummary;
+	}
+
+	Unit setIdProgram(Int idProgram){
+        this.idProgram = idProgram;
+    }
+
+    Int getIdProgram(){
+        return this.idProgram;
+    }
+
+	Unit setDate(String date){
+		this.date = date;
+	}
+
+	String getDate(){
+		return this.date;
+	}
+
+	Unit setDescription(String description){
+		this.description = description;
+	}
+
+	String getDescription(){
+		return this.description;
+	}
+
+	Unit setIncome(Int income){
+		this.income = income;
+	}
+
+	Int getIncome(){
+		return this.income;
+	}
+
+	Unit setExpense(Int expense){
+        this.expense = expense;
+    }
+
+    Int getExpense(){
+        return this.expense;
+    }
+}

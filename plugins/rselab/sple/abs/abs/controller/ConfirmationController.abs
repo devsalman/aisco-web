@@ -1,0 +1,107 @@
+module MConfirmationController;
+
+import Confirmation, ConfirmationImpl from MConfirmationModel;
+import ConfirmationDb, ConfirmationDbImpl from MConfirmationDbImpl;
+import ABSHttpRequest from ABS.Framework.Http;
+import Utility, UtilityImpl from ABS.Framework.Utility;
+
+interface ConfirmationController {
+    Pair<String, List<Confirmation>> list(ABSHttpRequest request);
+    Pair<String, List<Confirmation>> detail(ABSHttpRequest request);
+    Pair<String, List<Confirmation>> create(ABSHttpRequest request);
+    Pair<String, List<Confirmation>> save(ABSHttpRequest request);
+    Pair<String, List<Confirmation>> edit(ABSHttpRequest request);
+    Pair<String, List<Confirmation>> update(ABSHttpRequest request);
+    Pair<String, List<Confirmation>> delete(ABSHttpRequest request);
+}
+
+class ConfirmationControllerImpl implements ConfirmationController {
+    Pair<String, List<Confirmation>> list(ABSHttpRequest request) {
+        ConfirmationDb orm = new local ConfirmationDbImpl();
+
+        List<Confirmation> confirmations = orm.findAll("MConfirmationModel.ConfirmationImpl_c");
+
+        return Pair("confirmation/list", confirmations);
+    }
+
+    Pair<String, List<Confirmation>> detail(ABSHttpRequest request) {
+        String id = request.getInput("idConfirmation");
+        String condition = "idConfirmation=" + id;
+        ConfirmationDb orm = new local ConfirmationDbImpl();
+        Confirmation confirmation = orm.findByAttributes("MConfirmationModel.ConfirmationImpl_c",condition);
+
+        List<Confirmation> dataModel = Nil;
+        dataModel = appendright(dataModel, confirmation);
+
+        return Pair("confirmation/detail", dataModel);
+    }
+
+    Pair<String, List<Confirmation>> create(ABSHttpRequest request) {
+        return Pair("confirmation/create", Nil);
+    }
+
+    Pair<String, List<Confirmation>> save(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        ConfirmationDb orm = new local ConfirmationDbImpl();
+        Confirmation confirmation = new local ConfirmationImpl();
+
+        String accountNumber = request.getInput("accountNumber");
+        String amountStr = request.getInput("amount");
+        Int amount = utility.stringToInteger(amountStr);
+        String idProgramStr = request.getInput("idProgram");
+        Int idProgram = utility.stringToInteger(idProgramStr);
+
+        confirmation.setAccountNumber(accountNumber);
+        confirmation.setAmount(amount);
+        confirmation.setIdProgram(idProgram);
+        orm.save(confirmation);
+
+        return this.list(request);
+    }
+
+    Pair<String, List<Confirmation>> edit(ABSHttpRequest request) {
+        String id = request.getInput("idConfirmation");
+        String condition = "idConfirmation=" + id;
+        ConfirmationDb orm = new local ConfirmationDbImpl();
+        Confirmation confirmation = orm.findByAttributes("MConfirmationModel.ConfirmationImpl_c", condition);
+
+        List<Confirmation> dataModel = Nil;
+        dataModel = appendright(dataModel, confirmation);
+        return Pair("confirmation/edit", dataModel);
+    }
+
+    Pair<String, List<Confirmation>> update(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        String id = request.getInput("idConfirmation");
+        String condition = "idConfirmation=" + id;
+        ConfirmationDb orm = new local ConfirmationDbImpl();
+        Confirmation confirmation = orm.findByAttributes("MConfirmationModel.ConfirmationImpl_c",condition);
+
+        String accountNumber = request.getInput("accountNumber");
+        String amountStr = request.getInput("amount");
+        Int amount = utility.stringToInteger(amountStr);
+        String idProgramStr = request.getInput("idProgram");
+        Int idProgram = utility.stringToInteger(idProgramStr);
+
+        confirmation.setAccountNumber(accountNumber);
+        confirmation.setAmount(amount);
+        confirmation.setIdProgram(idProgram);
+        orm.update(confirmation);
+
+        return this.detail(request);
+    }
+
+    Pair<String, List<Confirmation>> delete(ABSHttpRequest request) {
+        String id = request.getInput("idConfirmation");
+        String condition = "idConfirmation=" + id;
+        ConfirmationDb orm = new local ConfirmationDbImpl();
+        Confirmation confirmation = orm.findByAttributes("MConfirmationModel.ConfirmationImpl_c", condition);
+
+        orm.delete(confirmation);
+
+        return this.list(request);
+    }
+}
+

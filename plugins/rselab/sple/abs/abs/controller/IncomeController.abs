@@ -1,0 +1,108 @@
+module MIncomeController;
+
+import Income, IncomeImpl from MIncomeModel;
+import IncomeDb, IncomeDbImpl from MIncomeDbImpl;
+import ABSHttpRequest from ABS.Framework.Http;
+import Utility, UtilityImpl from ABS.Framework.Utility;
+
+interface IncomeController {
+	Pair<String, List<Income>> list(ABSHttpRequest request);
+	Pair<String, List<Income>> detail(ABSHttpRequest request);
+	Pair<String, List<Income>> create(ABSHttpRequest request);
+	Pair<String, List<Income>> save(ABSHttpRequest request);
+	Pair<String, List<Income>> edit(ABSHttpRequest request);
+	Pair<String, List<Income>> update(ABSHttpRequest request);
+	Pair<String, List<Income>> delete(ABSHttpRequest request);
+}
+
+class IncomeControllerImpl {
+    Pair<String, List<Income>> list(ABSHttpRequest request) {
+	    IncomeDb orm = new local IncomeDbImpl();
+
+        List<Income> incomes = orm.findAll("MIncomeModel.IncomeImpl_c");
+
+		return Pair("income/list", incomes);
+	}
+
+    Pair<String, List<Income>> detail(ABSHttpRequest request) {
+        String id = request.getInput("idIncome");
+        String condition = "idIncome=" + id;
+        IncomeDb orm = new local IncomeDbImpl();
+        Income income = orm.findByAttributes("MIncomeModel.IncomeImpl_c",condition);
+
+        List<Income> dataModel = Nil;
+		dataModel = appendright(dataModel, income);
+
+        return Pair("income/detail", dataModel);
+    }
+
+	Pair<String, List<Income>> create(ABSHttpRequest request) {
+	    return Pair("income/create", Nil);
+	}
+
+	Pair<String, List<Income>> save(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        IncomeDb orm = new local IncomeDbImpl();
+        Income income = new local IncomeImpl();
+
+        String date = request.getInput("date");
+        String description = request.getInput("description");
+        String amountStr = request.getInput("amount");
+        Int amount = utility.stringToInteger(amountStr);
+        String idProgramStr = request.getInput("idProgram");
+        Int idProgram = utility.stringToInteger(idProgramStr);
+
+        income.setDate(date);
+        income.setDescription(description);
+        income.setAmount(amount);
+        income.setIdProgram(idProgram);
+        orm.save(income);
+
+        return this.list(request);
+    }
+
+	Pair<String, List<Income>> edit(ABSHttpRequest request) {
+        String id = request.getInput("idIncome");
+        String condition = "idIncome=" + id;
+        IncomeDb orm = new local IncomeDbImpl();
+        Income income = orm.findByAttributes("MIncomeModel.IncomeImpl_c", condition);
+
+        List<Income> dataModel = Nil;
+        dataModel = appendright(dataModel, income);
+        return Pair("income/edit", dataModel);
+	}
+
+	Pair<String, List<Income>> update(ABSHttpRequest request) {
+	    Utility utility = new local UtilityImpl();
+
+        String id = request.getInput("idIncome");
+        String condition = "idIncome=" + id;
+        IncomeDb orm = new local IncomeDbImpl();
+        Income income = orm.findByAttributes("MIncomeModel.IncomeImpl_c",condition);
+
+  		String date = request.getInput("date");
+        String description = request.getInput("description");
+        String amountStr = request.getInput("amount");
+        Int amount = utility.stringToInteger(amountStr);
+        String idProgramStr = request.getInput("idProgram");
+        Int idProgram = utility.stringToInteger(idProgramStr);
+
+        income.setDate(date);
+        income.setDescription(description);
+        income.setAmount(amount);
+        income.setIdProgram(idProgram);
+        orm.update(income);
+        return this.detail(request);
+    }
+
+	Pair<String, List<Income>> delete(ABSHttpRequest request) {
+        String id = request.getInput("idIncome");
+        String condition = "idIncome=" + id;
+        IncomeDb orm = new local IncomeDbImpl();
+        Income income = orm.findByAttributes("MIncomeModel.IncomeImpl_c", condition);
+
+        orm.delete(income);
+        return this.list(request);
+    }
+}

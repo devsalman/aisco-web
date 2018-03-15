@@ -1,0 +1,8 @@
+delta DProgramController;
+uses MProgramController;
+
+modifies class ProgramControllerImpl {
+    modifies Pair<String, List<Program>> create(ABSHttpRequest request) {
+        return Pair("delta/program/create", Nil);
+    }
+}

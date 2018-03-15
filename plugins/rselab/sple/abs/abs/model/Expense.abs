@@ -1,0 +1,63 @@
+module MExpenseModel;
+export *;
+
+interface Expense {
+	Unit setIdExpense(Int id);
+	Int getIdExpense();
+	Unit setDate(String date);
+	String getDate();
+	Unit setIdProgram(Int idProgram);
+	Int getIdProgram();
+	Unit setDescription(String description);
+	String getDescription();
+	Unit setAmount(Int amount);
+	Int getAmount();
+}
+
+class ExpenseImpl implements Expense {
+	[PK] Int idExpense = 0;
+	String date = "";
+	String description = "";
+	Int amount = 0;
+	Int idProgram = 0;
+
+	Unit setIdExpense(Int idExpense){
+		this.idExpense = idExpense;
+	}
+
+	Int getIdExpense(){
+		return this.idExpense;
+	}
+
+	Unit setIdProgram(Int idProgram){
+        this.idProgram = idProgram;
+    }
+
+    Int getIdProgram(){
+        return this.idProgram;
+    }
+
+	Unit setDate(String date){
+		this.date = date;
+	}
+
+	String getDate(){
+		return this.date;
+	}
+
+	Unit setDescription(String description){
+		this.description = description;
+	}
+
+	String getDescription(){
+		return this.description;
+	}
+
+	Unit setAmount(Int amount){
+		this.amount = amount;
+	}
+
+	Int getAmount(){
+		return this.amount;
+	}
+}

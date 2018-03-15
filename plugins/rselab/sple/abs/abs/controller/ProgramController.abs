@@ -1,0 +1,112 @@
+module MProgramController;
+import Program, ProgramImpl from MProgramModel;
+import ProgramDb, ProgramDbImpl from MProgramDbImpl;
+import ABSHttpRequest from ABS.Framework.Http;
+import Utility, UtilityImpl from ABS.Framework.Utility;
+
+interface ProgramController
+{
+	Pair<String, List<Program>> list(ABSHttpRequest request);
+	Pair<String, List<Program>> detail(ABSHttpRequest request);
+	Pair<String, List<Program>> create(ABSHttpRequest request);
+	Pair<String, List<Program>> save(ABSHttpRequest request);
+	Pair<String, List<Program>> edit(ABSHttpRequest request);
+	Pair<String, List<Program>> update(ABSHttpRequest request);
+	Pair<String, List<Program>> delete(ABSHttpRequest request);
+}
+
+class ProgramControllerImpl implements ProgramController
+{
+    Pair<String, List<Program>> list(ABSHttpRequest request) {
+	    ProgramDb orm = new local ProgramDbImpl();
+
+        List<Program> programs = orm.findAll("MProgramModel.ProgramImpl_c");
+
+		return Pair("program/list", programs);
+	}
+
+    Pair<String, List<Program>> detail(ABSHttpRequest request) {
+        String id = request.getInput("idProgram");
+        String condition = "idProgram=" + id;
+        ProgramDb orm = new local ProgramDbImpl();
+        Program program = orm.findByAttributes("MProgramModel.ProgramImpl_c",condition);
+
+        List<Program> dataModel = Nil;
+		dataModel = appendright(dataModel, program);
+
+        return Pair("program/detail", dataModel);
+    }
+
+	Pair<String, List<Program>> create(ABSHttpRequest request) {
+	    return Pair("program/create", Nil);
+	}
+
+	Pair<String, List<Program>> save(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        ProgramDb orm = new local ProgramDbImpl();
+        Program program = new local ProgramImpl();
+
+        String name = request.getInput("name");
+        String description = request.getInput("description");
+        String partner = request.getInput("partner");
+        String target = request.getInput("target");
+        String logoUrl = request.getInput("logoUrl");
+
+        program.setName(name);
+        program.setDescription(description);
+        program.setPartner(partner);
+        program.setTarget(target);
+        program.setLogoUrl(logoUrl);
+        orm.save(program);
+
+        return this.list(request);
+    }
+
+	Pair<String, List<Program>> edit(ABSHttpRequest request) {
+        String id = request.getInput("idProgram");
+        String condition = "idProgram=" + id;
+        ProgramDb orm = new local ProgramDbImpl();
+        Program program = orm.findByAttributes("MProgramModel.ProgramImpl_c", condition);
+
+        List<Program> dataModel = Nil;
+        dataModel = appendright(dataModel, program);
+        return Pair("program/edit", dataModel);
+	}
+
+	Pair<String, List<Program>> update(ABSHttpRequest request) {
+	    Utility utility = new local UtilityImpl();
+
+        String id = request.getInput("idProgram");
+        String condition = "idProgram=" + id;
+        ProgramDb orm = new local ProgramDbImpl();
+        Program program = orm.findByAttributes("MProgramModel.ProgramImpl_c",condition);
+
+        String name = request.getInput("name");
+        String description = request.getInput("description");
+        String partner = request.getInput("partner");
+        String target = request.getInput("target");
+        String logoUrl = request.getInput("logoUrl");
+
+        program.setName(name);
+        program.setDescription(description);
+        program.setPartner(partner);
+        program.setTarget(target);
+        program.setLogoUrl(logoUrl);
+        orm.update(program);
+
+        return this.detail(request);
+    }
+
+	Pair<String, List<Program>> delete(ABSHttpRequest request) {
+        String id = request.getInput("idProgram");
+        String condition = "idProgram=" + id;
+        ProgramDb orm = new local ProgramDbImpl();
+        Program program = orm.findByAttributes("MProgramModel.ProgramImpl_c", condition);
+
+        orm.delete(program);
+
+        return this.list(request);
+    }
+}
+

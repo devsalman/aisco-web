@@ -1,0 +1,44 @@
+// generated abs fli code for IncomeImpl
+module MIncomeDbImpl;
+export IncomeDb,IncomeDbImpl;
+import Income,IncomeImpl from MIncomeModel;
+import * from ABS.FLI;
+
+
+interface IncomeDb {
+	List<Income> findAll(String className);
+	List<Income> findAllByAttributes(String className, String query);
+	Income find(String className);
+	Income findByAttributes(String className, String query);
+	Unit save(Income object);
+	Unit delete(Income object);
+	Income update(Income object);
+	String log(String log);
+}
+
+
+[Foreign]
+class IncomeDbImpl implements IncomeDb {
+	List<Income> findAllByAttributes(String className, String query) {
+		return Nil;
+	}
+	List<Income> findAll(String className) {
+		return Nil;
+	}
+	Income findByAttributes(String className, String query) {
+		return new local IncomeImpl();
+	}
+	Income find(String className) {
+		return new local IncomeImpl();
+	}
+	Unit save(Income object) {
+	}
+	Unit delete(Income object) {
+	}
+	Income update(Income object) {
+		return new local IncomeImpl();
+	}
+	String log(String log) {
+		return "return log";
+	}
+}

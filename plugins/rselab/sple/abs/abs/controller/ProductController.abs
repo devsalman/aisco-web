@@ -1,0 +1,100 @@
+module MProductController;
+import Product, ProductImpl from MProductModel;
+import ProductDb, ProductDbImpl from MProductDbImpl;
+import ABSHttpRequest from ABS.Framework.Http;
+import Utility, UtilityImpl from ABS.Framework.Utility;
+
+interface ProductController
+{
+    Pair<String, List<Product>> list(ABSHttpRequest request);
+    Pair<String, List<Product>> detail(ABSHttpRequest request);
+    Pair<String, List<Product>> create(ABSHttpRequest request);
+    Pair<String, List<Product>> save(ABSHttpRequest request);
+    Pair<String, List<Product>> edit(ABSHttpRequest request);
+    Pair<String, List<Product>> update(ABSHttpRequest request);
+    Pair<String, List<Product>> delete(ABSHttpRequest request);
+}
+
+class ProductControllerImpl implements ProductController
+{
+    Pair<String, List<Product>> list(ABSHttpRequest request) {
+        ProductDb orm = new local ProductDbImpl();
+
+        List<Product> productItems = orm.findAll("MProductModel.ProductImpl_c");
+
+        return Pair("product/list", productItems);
+    }
+
+    Pair<String, List<Product>> detail(ABSHttpRequest request) {
+        String id = request.getInput("idProduct");
+        String condition = "idProduct=" + id;
+        ProductDb orm = new local ProductDbImpl();
+        Product productItem = orm.findByAttributes("MProductModel.ProductImpl_c",condition);
+
+        List<Product> dataModel = Nil;
+        dataModel = appendright(dataModel, productItem);
+
+        return Pair("product/detail", dataModel);
+    }
+
+    Pair<String, List<Product>> create(ABSHttpRequest request) {
+        return Pair("product/create", Nil);
+    }
+
+    Pair<String, List<Product>> save(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        ProductDb orm = new local ProductDbImpl();
+        Product productItem = new local ProductImpl();
+
+        String name = request.getInput("name");
+        String description = request.getInput("description");
+
+        productItem.setName(name);
+        productItem.setDescription(description);
+        orm.save(productItem);
+
+        return this.list(request);
+    }
+
+    Pair<String, List<Product>> edit(ABSHttpRequest request) {
+        String id = request.getInput("idProduct");
+        String condition = "idProduct=" + id;
+        ProductDb orm = new local ProductDbImpl();
+        Product productItem = orm.findByAttributes("MProductModel.ProductImpl_c", condition);
+
+        List<Product> dataModel = Nil;
+        dataModel = appendright(dataModel, productItem);
+        return Pair("product/edit", dataModel);
+    }
+
+    Pair<String, List<Product>> update(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        String id = request.getInput("idProduct");
+        String condition = "idProduct=" + id;
+        ProductDb orm = new local ProductDbImpl();
+        Product productItem = orm.findByAttributes("MProductModel.ProductImpl_c",condition);
+
+        String name = request.getInput("name");
+        String description = request.getInput("description");
+
+        productItem.setName(name);
+        productItem.setDescription(description);
+        orm.update(productItem);
+
+        return this.detail(request);
+    }
+
+    Pair<String, List<Product>> delete(ABSHttpRequest request) {
+        String id = request.getInput("idProduct");
+        String condition = "idProduct=" + id;
+        ProductDb orm = new local ProductDbImpl();
+        Product productItem = orm.findByAttributes("MProductModel.ProductImpl_c", condition);
+
+        orm.delete(productItem);
+
+        return this.list(request);
+    }
+}
+

@@ -1,0 +1,108 @@
+module MInstitutionalBeneficiaryController;
+import InstitutionalBeneficiary, InstitutionalBeneficiaryImpl from MInstitutionalBeneficiaryModel;
+import InstitutionalBeneficiaryDb, InstitutionalBeneficiaryDbImpl from MInstitutionalBeneficiaryDbImpl;
+import ABSHttpRequest from ABS.Framework.Http;
+import Utility, UtilityImpl from ABS.Framework.Utility;
+
+interface InstitutionalBeneficiaryController
+{
+    Pair<String, List<InstitutionalBeneficiary>> list(ABSHttpRequest request);
+    Pair<String, List<InstitutionalBeneficiary>> detail(ABSHttpRequest request);
+    Pair<String, List<InstitutionalBeneficiary>> create(ABSHttpRequest request);
+    Pair<String, List<InstitutionalBeneficiary>> save(ABSHttpRequest request);
+    Pair<String, List<InstitutionalBeneficiary>> edit(ABSHttpRequest request);
+    Pair<String, List<InstitutionalBeneficiary>> update(ABSHttpRequest request);
+    Pair<String, List<InstitutionalBeneficiary>> delete(ABSHttpRequest request);
+}
+
+class InstitutionalBeneficiaryControllerImpl implements InstitutionalBeneficiaryController
+{
+    Pair<String, List<InstitutionalBeneficiary>> list(ABSHttpRequest request) {
+        InstitutionalBeneficiaryDb orm = new local InstitutionalBeneficiaryDbImpl();
+
+        List<InstitutionalBeneficiary> institutionalBeneficiarys = orm.findAll("MInstitutionalBeneficiaryModel.InstitutionalBeneficiaryImpl_c");
+
+        return Pair("institutional-beneficiary/list", institutionalBeneficiarys);
+    }
+
+    Pair<String, List<InstitutionalBeneficiary>> detail(ABSHttpRequest request) {
+        String id = request.getInput("idInstitutionalBeneficiary");
+        String condition = "idInstitutionalBeneficiary=" + id;
+        InstitutionalBeneficiaryDb orm = new local InstitutionalBeneficiaryDbImpl();
+        InstitutionalBeneficiary institutionalBeneficiary = orm.findByAttributes("MInstitutionalBeneficiaryModel.InstitutionalBeneficiaryImpl_c",condition);
+
+        List<InstitutionalBeneficiary> dataModel = Nil;
+        dataModel = appendright(dataModel, institutionalBeneficiary);
+
+        return Pair("institutional-beneficiary/detail", dataModel);
+    }
+
+    Pair<String, List<InstitutionalBeneficiary>> create(ABSHttpRequest request) {
+        return Pair("institutional-beneficiary/create", Nil);
+    }
+
+    Pair<String, List<InstitutionalBeneficiary>> save(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        InstitutionalBeneficiaryDb orm = new local InstitutionalBeneficiaryDbImpl();
+        InstitutionalBeneficiary institutionalBeneficiary = new local InstitutionalBeneficiaryImpl();
+
+        String name = request.getInput("name");
+        String email = request.getInput("email");
+        String phone = request.getInput("phone");
+        String address = request.getInput("address");
+
+        institutionalBeneficiary.setName(name);
+        institutionalBeneficiary.setEmail(email);
+        institutionalBeneficiary.setPhone(phone);
+        institutionalBeneficiary.setAddress(address);
+        orm.save(institutionalBeneficiary);
+
+        return this.list(request);
+    }
+
+    Pair<String, List<InstitutionalBeneficiary>> edit(ABSHttpRequest request) {
+        String id = request.getInput("idInstitutionalBeneficiary");
+        String condition = "idInstitutionalBeneficiary=" + id;
+        InstitutionalBeneficiaryDb orm = new local InstitutionalBeneficiaryDbImpl();
+        InstitutionalBeneficiary institutionalBeneficiary = orm.findByAttributes("MInstitutionalBeneficiaryModel.InstitutionalBeneficiaryImpl_c", condition);
+
+        List<InstitutionalBeneficiary> dataModel = Nil;
+        dataModel = appendright(dataModel, institutionalBeneficiary);
+        return Pair("institutional-beneficiary/edit", dataModel);
+    }
+
+    Pair<String, List<InstitutionalBeneficiary>> update(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        String id = request.getInput("idInstitutionalBeneficiary");
+        String condition = "idInstitutionalBeneficiary=" + id;
+        InstitutionalBeneficiaryDb orm = new local InstitutionalBeneficiaryDbImpl();
+        InstitutionalBeneficiary institutionalBeneficiary = orm.findByAttributes("MInstitutionalBeneficiaryModel.InstitutionalBeneficiaryImpl_c",condition);
+
+        String name = request.getInput("name");
+        String email = request.getInput("email");
+        String phone = request.getInput("phone");
+        String address = request.getInput("address");
+
+        institutionalBeneficiary.setName(name);
+        institutionalBeneficiary.setEmail(email);
+        institutionalBeneficiary.setPhone(phone);
+        institutionalBeneficiary.setAddress(address);
+        orm.update(institutionalBeneficiary);
+
+        return this.detail(request);
+    }
+
+    Pair<String, List<InstitutionalBeneficiary>> delete(ABSHttpRequest request) {
+        String id = request.getInput("idInstitutionalBeneficiary");
+        String condition = "idInstitutionalBeneficiary=" + id;
+        InstitutionalBeneficiaryDb orm = new local InstitutionalBeneficiaryDbImpl();
+        InstitutionalBeneficiary institutionalBeneficiary = orm.findByAttributes("MInstitutionalBeneficiaryModel.InstitutionalBeneficiaryImpl_c", condition);
+
+        orm.delete(institutionalBeneficiary);
+
+        return this.list(request);
+    }
+}
+

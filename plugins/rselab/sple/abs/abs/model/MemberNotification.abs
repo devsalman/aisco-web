@@ -1,0 +1,39 @@
+module MMemberNotificationModel;
+export *;
+
+interface MemberNotification {
+    Int getIdMemberNotification();
+    Unit setIdMemberNotification(Int idMemberNotification);
+    Int getIdDonor();
+    Unit setIdDonor(Int idDonor);
+    String getTitle();
+    Unit setTitle(String title);
+    String getContent();
+    Unit setContent(String content);
+    String getPublishDate();
+    Unit setPublishDate(String publishDate);
+    String getThumbnailUrl();
+    Unit setThumbnailUrl(String thumbnailUrl);
+}
+
+class MemberNotificationImpl implements MemberNotification {
+    [PK] Int idMemberNotification = 0;
+    Int idDonor = 0;
+    String title = "";
+    String content = "";
+    String publishDate = "";
+    String thumbnailUrl = "";
+
+    Int getIdMemberNotification() { return this.idMemberNotification; }
+    Unit setIdMemberNotification(Int idMemberNotification) { this.idMemberNotification = idMemberNotification; }
+    Int getIdDonor() { return this.idDonor; }
+    Unit setIdDonor(Int idDonor) { this.idDonor = idDonor; }
+    String getTitle() { return this.title; }
+    Unit setTitle(String title) { this.title = title; }
+    String getContent() { return this.content; }
+    Unit setContent(String content) { this.content = content; }
+    String getPublishDate() { return this.publishDate; }
+    Unit setPublishDate(String publishDate) { this.publishDate = publishDate; }
+    String getThumbnailUrl() { return this.thumbnailUrl; }
+    Unit setThumbnailUrl(String thumbnailUrl) { this.thumbnailUrl = thumbnailUrl; }
+}

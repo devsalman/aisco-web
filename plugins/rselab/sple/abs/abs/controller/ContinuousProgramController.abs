@@ -1,0 +1,116 @@
+module MContinuousProgramController;
+import ContinuousProgram, ContinuousProgramImpl from MContinuousProgramModel;
+import ContinuousProgramDb, ContinuousProgramDbImpl from MContinuousProgramDbImpl;
+import ABSHttpRequest from ABS.Framework.Http;
+import Utility, UtilityImpl from ABS.Framework.Utility;
+
+interface ContinuousProgramController
+{
+    Pair<String, List<ContinuousProgram>> list(ABSHttpRequest request);
+    Pair<String, List<ContinuousProgram>> detail(ABSHttpRequest request);
+    Pair<String, List<ContinuousProgram>> create(ABSHttpRequest request);
+    Pair<String, List<ContinuousProgram>> save(ABSHttpRequest request);
+    Pair<String, List<ContinuousProgram>> edit(ABSHttpRequest request);
+    Pair<String, List<ContinuousProgram>> update(ABSHttpRequest request);
+    Pair<String, List<ContinuousProgram>> delete(ABSHttpRequest request);
+}
+
+class ContinuousProgramControllerImpl implements ContinuousProgramController
+{
+    Pair<String, List<ContinuousProgram>> list(ABSHttpRequest request) {
+        ContinuousProgramDb orm = new local ContinuousProgramDbImpl();
+
+        List<ContinuousProgram> continuousPrograms = orm.findAll("MContinuousProgramModel.ContinuousProgramImpl_c");
+
+        return Pair("continuous-program/list", continuousPrograms);
+    }
+
+    Pair<String, List<ContinuousProgram>> detail(ABSHttpRequest request) {
+        String id = request.getInput("idContinuousProgram");
+        String condition = "idContinuousProgram=" + id;
+        ContinuousProgramDb orm = new local ContinuousProgramDbImpl();
+        ContinuousProgram continuousProgram = orm.findByAttributes("MContinuousProgramModel.ContinuousProgramImpl_c",condition);
+
+        List<ContinuousProgram> dataModel = Nil;
+        dataModel = appendright(dataModel, continuousProgram);
+
+        return Pair("continuous-program/detail", dataModel);
+    }
+
+    Pair<String, List<ContinuousProgram>> create(ABSHttpRequest request) {
+        return Pair("continuous-program/create", Nil);
+    }
+
+    Pair<String, List<ContinuousProgram>> save(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        ContinuousProgramDb orm = new local ContinuousProgramDbImpl();
+        ContinuousProgram continuousProgram = new local ContinuousProgramImpl();
+
+        String name = request.getInput("name");
+        String description = request.getInput("description");
+        String date = request.getInput("endDate");
+        String partner = request.getInput("partner");
+        String target = request.getInput("target");
+        String logoUrl = request.getInput("logoUrl");
+
+        continuousProgram.setName(name);
+        continuousProgram.setDescription(description);
+        continuousProgram.setEndDate(date);
+        continuousProgram.setPartner(partner);
+        continuousProgram.setTarget(target);
+        continuousProgram.setLogoUrl(logoUrl);
+        orm.save(continuousProgram);
+
+        return this.list(request);
+    }
+
+    Pair<String, List<ContinuousProgram>> edit(ABSHttpRequest request) {
+        String id = request.getInput("idContinuousProgram");
+        String condition = "idContinuousProgram=" + id;
+        ContinuousProgramDb orm = new local ContinuousProgramDbImpl();
+        ContinuousProgram continuousProgram = orm.findByAttributes("MContinuousProgramModel.ContinuousProgramImpl_c", condition);
+
+        List<ContinuousProgram> dataModel = Nil;
+        dataModel = appendright(dataModel, continuousProgram);
+        return Pair("continuous-program/edit", dataModel);
+    }
+
+    Pair<String, List<ContinuousProgram>> update(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        String id = request.getInput("idContinuousProgram");
+        String condition = "idContinuousProgram=" + id;
+        ContinuousProgramDb orm = new local ContinuousProgramDbImpl();
+        ContinuousProgram continuousProgram = orm.findByAttributes("MContinuousProgramModel.ContinuousProgramImpl_c",condition);
+
+        String name = request.getInput("name");
+        String description = request.getInput("description");
+        String date = request.getInput("endDate");
+        String partner = request.getInput("partner");
+        String target = request.getInput("target");
+        String logoUrl = request.getInput("logoUrl");
+
+        continuousProgram.setName(name);
+        continuousProgram.setDescription(description);
+        continuousProgram.setEndDate(date);
+        continuousProgram.setPartner(partner);
+        continuousProgram.setTarget(target);
+        continuousProgram.setLogoUrl(logoUrl);
+        orm.update(continuousProgram);
+
+        return this.detail(request);
+    }
+
+    Pair<String, List<ContinuousProgram>> delete(ABSHttpRequest request) {
+        String id = request.getInput("idContinuousProgram");
+        String condition = "idContinuousProgram=" + id;
+        ContinuousProgramDb orm = new local ContinuousProgramDbImpl();
+        ContinuousProgram continuousProgram = orm.findByAttributes("MContinuousProgramModel.ContinuousProgramImpl_c", condition);
+
+        orm.delete(continuousProgram);
+
+        return this.list(request);
+    }
+}
+

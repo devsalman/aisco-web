@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ABSMVC" default="abs.compile.java" basedir="."
+	xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+
+	<property name="lib" location="lib" />
+	<property name="src" location="." />
+	<property name="target" location="target" />
+	<property name="dist" location="dist" />
+	<property name="external" location="external" />
+
+	<property name="src.abs" location="${src}/abs" />
+	<property name="src.abs.model" location="${src.abs}/model" />
+	<property name="src.abs.framework" location="${src.abs}/framework" />
+	<property name="src.abs.delta" location="${src.abs}/delta" />
+	<property name="src.abs.controller" location="${src.abs}/controller" />
+
+	<property name="src.java" location="${src}/java" />
+	<property name="src.orm" location="${src}/orm" />
+	<property name="src.server" location="${src}/server" />
+	<property name="src.java.fli" location="${src.java}/fli" />
+
+	<property name="target.java.src" location="${target}/java/src" />
+	<property name="target.java.bin" location="${target}/java/bin" />
+	<property name="target.schema" location="${target}/schema/schema.sql" />
+	<property name="target.orm" location="${target}/orm" />
+
+	<property name="lib.abs" location="${lib}/absfrontend.jar" />
+	<property name="lib.absbackend" location="${lib}/absbackend.jar" />
+	<property name="lib.orm" location="${lib}/absdborm.jar" />
+
+	<path id="build.abs.classpath">
+		<fileset dir="${lib}"/>
+	</path>
+
+	<!-- Check if absproduct property is set -->
+    <condition property="absproduct.set">
+        <isset property="absproduct"/>
+    </condition>
+	
+	<!-- Check if absproduct property is set -->
+    <condition property="warname.set">
+        <isset property="warname"/>
+    </condition>
+
+	<fileset dir="${src.abs}" id="src.abs.files">
+		<include name="**/*.abs" />
+	</fileset>
+
+	<fileset dir="${src.abs}" id="src.abs.files.to.schema">
+		<include name="model/*.abs" />
+		<include name="framework/*.abs" />
+
+
+		<exclude name="framework/ABSHttpRequest.abs" />
+		<exclude name="framework/Database.abs" />
+		<exclude name="framework/Route.abs" />
+		<exclude name="framework/Utility.abs" />
+		<exclude name="model/*Db.abs" />
+	</fileset>
+
+	<fileset dir="${src.abs}" id="src.abs.product.files">
+
+		<include name="**/*.abs" />
+	</fileset>
+
+	<fileset dir="${src.abs.model}" id="src.abs.model.files">
+		<include name="**/*.abs" />
+		<exclude name="**/*Db.abs" />
+	</fileset>
+	
+	<pathconvert property="src.abs.fileargs" refid="src.abs.files"
+		pathsep=" " />
+
+	<pathconvert property="src.abs.fileargs.to.schema" refid="src.abs.files.to.schema"
+		pathsep=" " />
+
+	<pathconvert property="src.abs.model.fileargs" refid="src.abs.model.files"
+		pathsep=" " />
+
+	<pathconvert property="src.abs.product.fileargs" refid="src.abs.product.files"
+		pathsep=" " />
+
+	<target name="clean" description="Removes all generated files">
+		<delete failonerror="true" includeemptydirs="true">
+			<fileset dir="${target}" />
+			<fileset dir="${src.java.fli}"/>
+			<dirset dir="${src.abs.model}" includes="gen_*" />
+		</delete>
+	</target>
+
+	<target name="prepare" depends="clean">
+		<mkdir dir="${src.java.fli}" />
+		<mkdir dir="${target.java.src}" />
+		<mkdir dir="${target.java.bin}" />
+		<mkdir dir="${target.schema}" />
+		<mkdir dir="${target.orm}" />
+	</target>
+
+	<target name="abs.typecheck" depends="prepare">
+		<java classname="abs.frontend.parser.Main" fork="true"
+			failonerror="true" classpathref="build.abs.classpath">
+			<arg line="${src.abs.fileargs}" />
+		</java>
+	</target>
+
+	<target name="build.orm" depends="clean">
+		<javac classpathref="build.abs.classpath" srcdir="${src.orm}"
+			   destdir="${target.orm}" />
+
+		<jar destfile="${lib.orm}" basedir="${target.orm}">
+			<manifest>
+				<attribute name="Main-Class" value="com.fmse.abs.orm.AbsDbOrm"/>
+				<attribute name="Class-Path" value="lib/absbackend.jar lib/absfrontend.jar jar"/>
+			</manifest>
+		</jar>
+
+		<delete dir="${target.orm}"/>
+	</target>
+
+	<target name="abs.generate.fli" description="Generates Fli code"
+		depends="clean,prepare" if="absproduct.set">
+
+		<echo>FILE: ${src.abs.model.fileargs}</echo>
+		<java classname="abs.backend.absframeworks.GenerateFLIModel" fork="true"
+			failonerror="true" classpathref="build.abs.classpath">
+			<arg line="${src.abs.model.fileargs}" />
+		</java>
+
+		<copy todir="${src.java.fli}" verbose="false">
+			<fileset dir="gen_java_db_fli"/>
+		</copy>
+
+		<copy todir="${src.abs.model}" verbose="false">
+			<fileset dir="gen_abs_db_fli"/>
+		</copy>
+
+		<delete dir="gen_java_db_fli" failonerror="true" includeemptydirs="true">
+		</delete>
+
+		<delete dir="gen_abs_db_fli" failonerror="true" includeemptydirs="true">
+		</delete>
+	</target>
+
+	<target name="abs.generate.schema" description="Generates Schema code"
+		depends="clean,prepare,abs.generate.fli" if="absproduct.set">
+
+		<echo>FILE: ${src.abs.fileargs.to.schema}</echo>
+		<java classname="abs.backend.dbschema.GenerateDBSchema" fork="true"
+			failonerror="true" classpathref="build.abs.classpath">
+			<arg line="${src.abs.fileargs.to.schema}" />
+			<arg value="-product=${absproduct}" />
+			<arg value="-o" />
+			<arg value="${target.schema}" />
+		</java>
+	</target>
+
+	<target name="create.schema" description="Create Schema to Database"
+		depends="clean,prepare,abs.generate.schema,build.orm" if="absproduct.set">
+
+		<echo>FILE: ${src.abs.fileargs}</echo>
+		<java classname="com.fmse.abs.orm.AbsDbOrm" fork="true"
+			failonerror="true" classpathref="build.abs.classpath">
+			<arg line="${target.schema}" />
+		</java>
+	</target>
+	
+	<target name="abs.generate.java" description="Generates Java code"
+		depends="clean,prepare,create.schema" if="absproduct.set">
+
+		<echo>FILE: ${src.abs.fileargs}</echo>
+		<java classname="abs.backend.java.JavaBackend" fork="true"
+			failonerror="true" classpathref="build.abs.classpath">
+			<arg line="${src.abs.fileargs}" />
+			<arg value="-sourceonly" />
+			<arg value="-d" />
+			<arg value="${target.java.src}" />
+			<arg value="-product=${absproduct}" />
+		</java>
+		
+		<copy todir="${target.java.src}" verbose="false">
+			<fileset dir="${src.java}"/>
+			<fileset dir="${src.server}"/>
+		</copy>
+	</target>
+
+	<target name="abs.compile.java" depends="abs.generate.java">
+		<javac classpathref="build.abs.classpath" srcdir="${target.java.src}"
+			destdir="${target.java.bin}" />
+			
+		<copy todir="${target.java.bin}/View">
+			<fileset dir="${src.abs}/view" />
+		</copy>
+	</target>
+	
+	<target name="abs.deploy" depends="abs.compile.java">
+		<jar destfile="${absproduct}.jar" basedir="${target.java.bin}">
+			<manifest>
+				<attribute name="Main-Class" value="com.fmse.absserver.ABSServer"/>
+				<attribute name="Class-Path" value="
+				lib/absbackend.jar
+				lib/absfrontend.jar jar
+				lib/commons-cli-1.2.jar
+				lib/jasper-6.0.44.jar
+				lib/javassist-3.16.1-GA.jar lib/jsp-api-2.2.1-b03.jar
+				lib/mtvl.jar lib/mysql-connector-java-5.1.23-bin.jar
+				lib/ognl-3.0.6.jar
+				lib/slf4j-api-1.6.1.jar
+				lib/thymeleaf-2.1.3.RELEASE.jar
+				lib/tomcat-embed-core-8.0.23.jar
+				lib/tomcat-juli-8.0.23.jar lib/unbescape-1.0.jar
+				lib/absdborm.jar"/>
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="abs.dist" if="warname.set">
+		<!-- Clean dist directory -->
+		<delete failonerror="true" includeemptydirs="true">
+			<fileset dir="${dist}" />
+		</delete>
+
+		<!-- Copy ABS Server to dist directory -->
+		<copy todir="${dist}/classes/com/fmse/absserver">
+			<fileset dir="${target}/java/bin/com/fmse/absserver"/>
+		</copy>
+
+		<!-- Create war file -->
+		<war destfile="${dist}/${warname}.war" needxmlfile="false">
+			<fileset dir="${external}">
+				<include name="**/*.*"/>
+			</fileset>
+			
+			<classes dir="${dist}/classes/" />
+
+			<lib dir="${lib}">
+				<include name="**/*.*"/>
+				<exclude name="jasper-6.0.44.jar"/>
+				<exclude name="jsp-api-2.2.1-b03.jar"/>
+				<exclude name="tomcat-embed-core-8.0.23.jar"/>
+				<exclude name="tomcat-juli-8.0.23.jar"/>
+			</lib>
+
+			<lib dir=".">
+				<include name="${absproduct}.jar"/>
+			</lib>
+		</war>
+	</target>
+</project>

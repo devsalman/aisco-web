@@ -1,0 +1,100 @@
+module MIndividualBeneficiaryController;
+import IndividualBeneficiary, IndividualBeneficiaryImpl from MIndividualBeneficiaryModel;
+import IndividualBeneficiaryDb, IndividualBeneficiaryDbImpl from MIndividualBeneficiaryDbImpl;
+import ABSHttpRequest from ABS.Framework.Http;
+import Utility, UtilityImpl from ABS.Framework.Utility;
+
+interface IndividualBeneficiaryController
+{
+    Pair<String, List<IndividualBeneficiary>> list(ABSHttpRequest request);
+    Pair<String, List<IndividualBeneficiary>> detail(ABSHttpRequest request);
+    Pair<String, List<IndividualBeneficiary>> create(ABSHttpRequest request);
+    Pair<String, List<IndividualBeneficiary>> save(ABSHttpRequest request);
+    Pair<String, List<IndividualBeneficiary>> edit(ABSHttpRequest request);
+    Pair<String, List<IndividualBeneficiary>> update(ABSHttpRequest request);
+    Pair<String, List<IndividualBeneficiary>> delete(ABSHttpRequest request);
+}
+
+class IndividualBeneficiaryControllerImpl implements IndividualBeneficiaryController
+{
+    Pair<String, List<IndividualBeneficiary>> list(ABSHttpRequest request) {
+        IndividualBeneficiaryDb orm = new local IndividualBeneficiaryDbImpl();
+
+        List<IndividualBeneficiary> individualBeneficiarys = orm.findAll("MIndividualBeneficiaryModel.IndividualBeneficiaryImpl_c");
+
+        return Pair("individual-beneficiary/list", individualBeneficiarys);
+    }
+
+    Pair<String, List<IndividualBeneficiary>> detail(ABSHttpRequest request) {
+        String id = request.getInput("idIndividualBeneficiary");
+        String condition = "idIndividualBeneficiary=" + id;
+        IndividualBeneficiaryDb orm = new local IndividualBeneficiaryDbImpl();
+        IndividualBeneficiary individualBeneficiary = orm.findByAttributes("MIndividualBeneficiaryModel.IndividualBeneficiaryImpl_c",condition);
+
+        List<IndividualBeneficiary> dataModel = Nil;
+        dataModel = appendright(dataModel, individualBeneficiary);
+
+        return Pair("individual-beneficiary/detail", dataModel);
+    }
+
+    Pair<String, List<IndividualBeneficiary>> create(ABSHttpRequest request) {
+        return Pair("individual-beneficiary/create", Nil);
+    }
+
+    Pair<String, List<IndividualBeneficiary>> save(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        IndividualBeneficiaryDb orm = new local IndividualBeneficiaryDbImpl();
+        IndividualBeneficiary individualBeneficiary = new local IndividualBeneficiaryImpl();
+
+        String name = request.getInput("name");
+        String address = request.getInput("address");
+
+        individualBeneficiary.setName(name);
+        individualBeneficiary.setAddress(address);
+        orm.save(individualBeneficiary);
+
+        return this.list(request);
+    }
+
+    Pair<String, List<IndividualBeneficiary>> edit(ABSHttpRequest request) {
+        String id = request.getInput("idIndividualBeneficiary");
+        String condition = "idIndividualBeneficiary=" + id;
+        IndividualBeneficiaryDb orm = new local IndividualBeneficiaryDbImpl();
+        IndividualBeneficiary individualBeneficiary = orm.findByAttributes("MIndividualBeneficiaryModel.IndividualBeneficiaryImpl_c", condition);
+
+        List<IndividualBeneficiary> dataModel = Nil;
+        dataModel = appendright(dataModel, individualBeneficiary);
+        return Pair("individual-beneficiary/edit", dataModel);
+    }
+
+    Pair<String, List<IndividualBeneficiary>> update(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        String id = request.getInput("idIndividualBeneficiary");
+        String condition = "idIndividualBeneficiary=" + id;
+        IndividualBeneficiaryDb orm = new local IndividualBeneficiaryDbImpl();
+        IndividualBeneficiary individualBeneficiary = orm.findByAttributes("MIndividualBeneficiaryModel.IndividualBeneficiaryImpl_c",condition);
+
+        String name = request.getInput("name");
+        String address = request.getInput("address");
+
+        individualBeneficiary.setName(name);
+        individualBeneficiary.setAddress(address);
+        orm.update(individualBeneficiary);
+
+        return this.detail(request);
+    }
+
+    Pair<String, List<IndividualBeneficiary>> delete(ABSHttpRequest request) {
+        String id = request.getInput("idIndividualBeneficiary");
+        String condition = "idIndividualBeneficiary=" + id;
+        IndividualBeneficiaryDb orm = new local IndividualBeneficiaryDbImpl();
+        IndividualBeneficiary individualBeneficiary = orm.findByAttributes("MIndividualBeneficiaryModel.IndividualBeneficiaryImpl_c", condition);
+
+        orm.delete(individualBeneficiary);
+
+        return this.list(request);
+    }
+}
+

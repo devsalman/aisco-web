@@ -1,0 +1,44 @@
+// generated abs fli code for IndividualBeneficiaryImpl
+module MIndividualBeneficiaryDbImpl;
+export IndividualBeneficiaryDb,IndividualBeneficiaryDbImpl;
+import IndividualBeneficiary,IndividualBeneficiaryImpl from MIndividualBeneficiaryModel;
+import * from ABS.FLI;
+
+
+interface IndividualBeneficiaryDb {
+	List<IndividualBeneficiary> findAll(String className);
+	List<IndividualBeneficiary> findAllByAttributes(String className, String query);
+	IndividualBeneficiary find(String className);
+	IndividualBeneficiary findByAttributes(String className, String query);
+	Unit save(IndividualBeneficiary object);
+	Unit delete(IndividualBeneficiary object);
+	IndividualBeneficiary update(IndividualBeneficiary object);
+	String log(String log);
+}
+
+
+[Foreign]
+class IndividualBeneficiaryDbImpl implements IndividualBeneficiaryDb {
+	List<IndividualBeneficiary> findAllByAttributes(String className, String query) {
+		return Nil;
+	}
+	List<IndividualBeneficiary> findAll(String className) {
+		return Nil;
+	}
+	IndividualBeneficiary findByAttributes(String className, String query) {
+		return new local IndividualBeneficiaryImpl();
+	}
+	IndividualBeneficiary find(String className) {
+		return new local IndividualBeneficiaryImpl();
+	}
+	Unit save(IndividualBeneficiary object) {
+	}
+	Unit delete(IndividualBeneficiary object) {
+	}
+	IndividualBeneficiary update(IndividualBeneficiary object) {
+		return new local IndividualBeneficiaryImpl();
+	}
+	String log(String log) {
+		return "return log";
+	}
+}

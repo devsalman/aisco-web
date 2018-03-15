@@ -1,0 +1,44 @@
+// generated abs fli code for EventImpl
+module MEventDbImpl;
+export EventDb,EventDbImpl;
+import Event,EventImpl from MEventModel;
+import * from ABS.FLI;
+
+
+interface EventDb {
+	List<Event> findAll(String className);
+	List<Event> findAllByAttributes(String className, String query);
+	Event find(String className);
+	Event findByAttributes(String className, String query);
+	Unit save(Event object);
+	Unit delete(Event object);
+	Event update(Event object);
+	String log(String log);
+}
+
+
+[Foreign]
+class EventDbImpl implements EventDb {
+	List<Event> findAllByAttributes(String className, String query) {
+		return Nil;
+	}
+	List<Event> findAll(String className) {
+		return Nil;
+	}
+	Event findByAttributes(String className, String query) {
+		return new local EventImpl();
+	}
+	Event find(String className) {
+		return new local EventImpl();
+	}
+	Unit save(Event object) {
+	}
+	Unit delete(Event object) {
+	}
+	Event update(Event object) {
+		return new local EventImpl();
+	}
+	String log(String log) {
+		return "return log";
+	}
+}

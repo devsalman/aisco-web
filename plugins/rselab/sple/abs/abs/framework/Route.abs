@@ -1,0 +1,80 @@
+module ABS.Framework.Route;
+
+interface RouteConfig
+{
+	String route(String url);
+}
+
+class RouteConfigImpl implements RouteConfig
+{
+	String route(String url)
+	{
+		String result = case url
+		{
+			"/" => "all:MProgramController.ProgramControllerImpl@list";
+            // CRUD Program
+            "/admin/program/list.abs" => "all:MProgramController.ProgramControllerImpl@list";
+            "/admin/program/detail.abs" => "all:MProgramController.ProgramControllerImpl@detail";
+            "/admin/program/create.abs" => "all:MProgramController.ProgramControllerImpl@create";
+            "/admin/program/save.abs" => "all:MProgramController.ProgramControllerImpl@save";
+            "/admin/program/edit.abs" => "all:MProgramController.ProgramControllerImpl@edit";
+            "/admin/program/update.abs" => "all:MProgramController.ProgramControllerImpl@update";
+            "/admin/program/delete.abs" => "all:MProgramController.ProgramControllerImpl@delete";
+
+            // CRUD Financial Report
+            "/admin/financial-report/list.abs" => "all:MFinancialReportController.FinancialReportControllerImpl@list";
+            "/admin/financial-report/detail.abs" => "all:MFinancialReportController.FinancialReportControllerImpl@detail";
+            "/admin/financial-report/create.abs" => "all:MFinancialReportController.FinancialReportControllerImpl@create";
+            "/admin/financial-report/save.abs" => "all:MFinancialReportController.FinancialReportControllerImpl@save";
+            "/admin/financial-report/edit.abs" => "all:MFinancialReportController.FinancialReportControllerImpl@edit";
+            "/admin/financial-report/update.abs" => "all:MFinancialReportController.FinancialReportControllerImpl@update";
+            "/admin/financial-report/delete.abs" => "all:MFinancialReportController.FinancialReportControllerImpl@delete";
+
+
+
+
+
+
+            // CRUD StoryBoard
+            "/admin/story-board/list.abs" => "all:MStoryBoardController.StoryBoardControllerImpl@list";
+            "/admin/story-board/detail.abs" => "all:MStoryBoardController.StoryBoardControllerImpl@detail";
+            "/admin/story-board/create.abs" => "all:MStoryBoardController.StoryBoardControllerImpl@create";
+            "/admin/story-board/save.abs" => "all:MStoryBoardController.StoryBoardControllerImpl@save";
+            "/admin/story-board/edit.abs" => "all:MStoryBoardController.StoryBoardControllerImpl@edit";
+            "/admin/story-board/update.abs" => "all:MStoryBoardController.StoryBoardControllerImpl@update";
+            "/admin/story-board/delete.abs" => "all:MStoryBoardController.StoryBoardControllerImpl@delete";
+
+            // CRUD General Journal
+            "/admin/general-journal/list.abs" => "all:MGeneralJournalController.GeneralJournalControllerImpl@list";
+            "/admin/general-journal/detail.abs" => "all:MGeneralJournalController.GeneralJournalControllerImpl@detail";
+            "/admin/general-journal/create.abs" => "all:MGeneralJournalController.GeneralJournalControllerImpl@create";
+            "/admin/general-journal/save.abs" => "all:MGeneralJournalController.GeneralJournalControllerImpl@save";
+            "/admin/general-journal/edit.abs" => "all:MGeneralJournalController.GeneralJournalControllerImpl@edit";
+            "/admin/general-journal/update.abs" => "all:MGeneralJournalController.GeneralJournalControllerImpl@update";
+            "/admin/general-journal/delete.abs" => "all:MGeneralJournalController.GeneralJournalControllerImpl@delete";
+
+            // CRUD Item Donation
+            "/admin/item-donation/list.abs" => "all:MItemDonationController.ItemDonationControllerImpl@list";
+            "/admin/item-donation/detail.abs" => "all:MItemDonationController.ItemDonationControllerImpl@detail";
+            "/admin/item-donation/create.abs" => "all:MItemDonationController.ItemDonationControllerImpl@create";
+            "/admin/item-donation/save.abs" => "all:MItemDonationController.ItemDonationControllerImpl@save";
+            "/admin/item-donation/edit.abs" => "all:MItemDonationController.ItemDonationControllerImpl@edit";
+            "/admin/item-donation/update.abs" => "all:MItemDonationController.ItemDonationControllerImpl@update";
+            "/admin/item-donation/delete.abs" => "all:MItemDonationController.ItemDonationControllerImpl@delete";
+
+            // CRUD Money Donation
+            "/admin/money-donation/list.abs" => "all:MMoneyDonationController.MoneyDonationControllerImpl@list";
+            "/admin/money-donation/detail.abs" => "all:MMoneyDonationController.MoneyDonationControllerImpl@detail";
+            "/admin/money-donation/create.abs" => "all:MMoneyDonationController.MoneyDonationControllerImpl@create";
+            "/admin/money-donation/save.abs" => "all:MMoneyDonationController.MoneyDonationControllerImpl@save";
+            "/admin/money-donation/edit.abs" => "all:MMoneyDonationController.MoneyDonationControllerImpl@edit";
+            "/admin/money-donation/update.abs" => "all:MMoneyDonationController.MoneyDonationControllerImpl@update";
+            "/admin/money-donation/delete.abs" => "all:MMoneyDonationController.MoneyDonationControllerImpl@delete";
+
+
+			_ => "";
+		};
+		
+		return result;
+	}
+}

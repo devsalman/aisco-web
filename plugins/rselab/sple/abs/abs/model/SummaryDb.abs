@@ -1,0 +1,44 @@
+// generated abs fli code for SummaryImpl
+module MSummaryDbImpl;
+export SummaryDb,SummaryDbImpl;
+import Summary,SummaryImpl from MSummaryModel;
+import * from ABS.FLI;
+
+
+interface SummaryDb {
+	List<Summary> findAll(String className);
+	List<Summary> findAllByAttributes(String className, String query);
+	Summary find(String className);
+	Summary findByAttributes(String className, String query);
+	Unit save(Summary object);
+	Unit delete(Summary object);
+	Summary update(Summary object);
+	String log(String log);
+}
+
+
+[Foreign]
+class SummaryDbImpl implements SummaryDb {
+	List<Summary> findAllByAttributes(String className, String query) {
+		return Nil;
+	}
+	List<Summary> findAll(String className) {
+		return Nil;
+	}
+	Summary findByAttributes(String className, String query) {
+		return new local SummaryImpl();
+	}
+	Summary find(String className) {
+		return new local SummaryImpl();
+	}
+	Unit save(Summary object) {
+	}
+	Unit delete(Summary object) {
+	}
+	Summary update(Summary object) {
+		return new local SummaryImpl();
+	}
+	String log(String log) {
+		return "return log";
+	}
+}

@@ -1,0 +1,44 @@
+// generated abs fli code for InstitutionalBeneficiaryImpl
+module MInstitutionalBeneficiaryDbImpl;
+export InstitutionalBeneficiaryDb,InstitutionalBeneficiaryDbImpl;
+import InstitutionalBeneficiary,InstitutionalBeneficiaryImpl from MInstitutionalBeneficiaryModel;
+import * from ABS.FLI;
+
+
+interface InstitutionalBeneficiaryDb {
+	List<InstitutionalBeneficiary> findAll(String className);
+	List<InstitutionalBeneficiary> findAllByAttributes(String className, String query);
+	InstitutionalBeneficiary find(String className);
+	InstitutionalBeneficiary findByAttributes(String className, String query);
+	Unit save(InstitutionalBeneficiary object);
+	Unit delete(InstitutionalBeneficiary object);
+	InstitutionalBeneficiary update(InstitutionalBeneficiary object);
+	String log(String log);
+}
+
+
+[Foreign]
+class InstitutionalBeneficiaryDbImpl implements InstitutionalBeneficiaryDb {
+	List<InstitutionalBeneficiary> findAllByAttributes(String className, String query) {
+		return Nil;
+	}
+	List<InstitutionalBeneficiary> findAll(String className) {
+		return Nil;
+	}
+	InstitutionalBeneficiary findByAttributes(String className, String query) {
+		return new local InstitutionalBeneficiaryImpl();
+	}
+	InstitutionalBeneficiary find(String className) {
+		return new local InstitutionalBeneficiaryImpl();
+	}
+	Unit save(InstitutionalBeneficiary object) {
+	}
+	Unit delete(InstitutionalBeneficiary object) {
+	}
+	InstitutionalBeneficiary update(InstitutionalBeneficiary object) {
+		return new local InstitutionalBeneficiaryImpl();
+	}
+	String log(String log) {
+		return "return log";
+	}
+}

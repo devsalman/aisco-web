@@ -1,0 +1,44 @@
+module MEventModel;
+export *;
+
+interface Event {
+    Int getIdEvent();
+    Unit setIdEvent(Int idEvent);
+    String getName();
+    Unit setName(String name);
+    String getDate();
+    Unit setDate(String date);
+    String getDescription();
+    Unit setDescription(String description);
+    String getTarget();
+    Unit setTarget(String target);
+    String getPartner();
+    Unit setPartner(String partner);
+    String getLogoUrl();
+    Unit setLogoUrl(String logoUrl);
+}
+
+class EventImpl implements Event {
+    [PK] Int idEvent = 0;
+    String name = "";
+    String description = "";
+    String date = "";
+    String target = "";
+    String partner = "";
+    String logoUrl = "";
+
+    Int getIdEvent() { return this.idEvent; }
+    Unit setIdEvent(Int idEvent) { this.idEvent = idEvent; }
+    String getName() { return this.name; }
+    Unit setName(String name) { this.name = name; }
+    String getDate() { return this.date; }
+    Unit setDate(String date) { this.date = date; }
+    String getDescription() { return this.description; }
+    Unit setDescription(String description) { this.description = description; }
+    String getTarget() { return this.target; }
+    Unit setTarget(String target) { this.target = target; }
+    String getPartner() { return this.partner; }
+    Unit setPartner(String partner) { this.partner = partner; }
+    String getLogoUrl() { return this.logoUrl; }
+    Unit setLogoUrl(String logoUrl) { this.logoUrl = logoUrl; }
+}

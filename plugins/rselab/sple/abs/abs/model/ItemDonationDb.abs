@@ -1,0 +1,44 @@
+// generated abs fli code for ItemDonationImpl
+module MItemDonationDbImpl;
+export ItemDonationDb,ItemDonationDbImpl;
+import ItemDonation,ItemDonationImpl from MItemDonationModel;
+import * from ABS.FLI;
+
+
+interface ItemDonationDb {
+	List<ItemDonation> findAll(String className);
+	List<ItemDonation> findAllByAttributes(String className, String query);
+	ItemDonation find(String className);
+	ItemDonation findByAttributes(String className, String query);
+	Unit save(ItemDonation object);
+	Unit delete(ItemDonation object);
+	ItemDonation update(ItemDonation object);
+	String log(String log);
+}
+
+
+[Foreign]
+class ItemDonationDbImpl implements ItemDonationDb {
+	List<ItemDonation> findAllByAttributes(String className, String query) {
+		return Nil;
+	}
+	List<ItemDonation> findAll(String className) {
+		return Nil;
+	}
+	ItemDonation findByAttributes(String className, String query) {
+		return new local ItemDonationImpl();
+	}
+	ItemDonation find(String className) {
+		return new local ItemDonationImpl();
+	}
+	Unit save(ItemDonation object) {
+	}
+	Unit delete(ItemDonation object) {
+	}
+	ItemDonation update(ItemDonation object) {
+		return new local ItemDonationImpl();
+	}
+	String log(String log) {
+		return "return log";
+	}
+}

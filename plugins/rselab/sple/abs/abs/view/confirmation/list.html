@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head th:replace="fragments :: head"></head>
+	<body>
+        <div th:replace="fragments :: navigation"></div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div th:replace="fragments :: menu"></div>
+                <div class="col-sm-9">
+                    <a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Konfirmasi</strong></a>
+                    <hr />
+
+                    <div class="row margin-bottom-10">
+                        <div class="col-md-12">
+                            <a th:href="@{~/admin/confirmation/create.abs}" class="btn btn-primary btn-create">Buat Laporan</a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Account Number</th>
+                                        <th>Jumlah</th>
+                                        <th>Program</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="confirmation : ${dataList}">
+                                        <td th:text="${confirmation.idConfirmation}">1</td>
+                                        <td><a th:text="${confirmation.accountNumber.getString()}" th:href="@{~/admin/confirmation/detail.abs(idConfirmation=${confirmation.idConfirmation})}">Detail</a></td>
+                                        <td th:text="${confirmation.amount}">Jumlah</td>
+                                        <td th:text="${confirmation.idProgram}">Program</td>
+                                        <td>
+                                            <a th:href="@{~/admin/confirmation/delete.abs(idConfirmation=${confirmation.idConfirmation})}" class="btn-delete">Delete</a> |
+                                            <a th:href="@{~/admin/confirmation/edit.abs(idConfirmation=${confirmation.idConfirmation})}" class="btn-edit">Edit</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="fragments :: footer"></footer>
+	</body>
+</html>

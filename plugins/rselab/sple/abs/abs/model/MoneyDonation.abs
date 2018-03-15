@@ -1,0 +1,29 @@
+module MMoneyDonationModel;
+export *;
+
+interface MoneyDonation {
+	Int getIdMoneyDonation();
+	Unit setIdMoneyDonation(Int idMoneyDonation);
+	Int getIdProgram();
+	Unit setIdProgram(Int idProgram);
+	String getAccountNumber();
+	Unit setAccountNumber(String accountNumber);
+    Int getAmount();
+    Unit setAmount(Int amount);
+}
+
+class MoneyDonationImpl implements MoneyDonation {
+	[PK]Int idMoneyDonation = 0;
+	Int idProgram = 0;
+	String accountNumber = "";
+	Int amount = 0;
+
+	Int getIdMoneyDonation() { return this.idMoneyDonation; }
+    Unit setIdMoneyDonation(Int idMoneyDonation) { this.idMoneyDonation = idMoneyDonation; }
+    Int getIdProgram() { return this.idProgram; }
+    Unit setIdProgram(Int idProgram) { this.idProgram = idProgram; }
+    String getAccountNumber() { return this.accountNumber; }
+    Unit setAccountNumber(String accountNumber) { this.accountNumber = accountNumber; }
+    Int getAmount() { return this.amount; }
+    Unit setAmount(Int amount) { this.amount = amount; }
+}

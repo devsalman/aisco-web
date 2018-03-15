@@ -1,0 +1,44 @@
+// generated abs fli code for MoneyDonationImpl
+module MMoneyDonationDbImpl;
+export MoneyDonationDb,MoneyDonationDbImpl;
+import MoneyDonation,MoneyDonationImpl from MMoneyDonationModel;
+import * from ABS.FLI;
+
+
+interface MoneyDonationDb {
+	List<MoneyDonation> findAll(String className);
+	List<MoneyDonation> findAllByAttributes(String className, String query);
+	MoneyDonation find(String className);
+	MoneyDonation findByAttributes(String className, String query);
+	Unit save(MoneyDonation object);
+	Unit delete(MoneyDonation object);
+	MoneyDonation update(MoneyDonation object);
+	String log(String log);
+}
+
+
+[Foreign]
+class MoneyDonationDbImpl implements MoneyDonationDb {
+	List<MoneyDonation> findAllByAttributes(String className, String query) {
+		return Nil;
+	}
+	List<MoneyDonation> findAll(String className) {
+		return Nil;
+	}
+	MoneyDonation findByAttributes(String className, String query) {
+		return new local MoneyDonationImpl();
+	}
+	MoneyDonation find(String className) {
+		return new local MoneyDonationImpl();
+	}
+	Unit save(MoneyDonation object) {
+	}
+	Unit delete(MoneyDonation object) {
+	}
+	MoneyDonation update(MoneyDonation object) {
+		return new local MoneyDonationImpl();
+	}
+	String log(String log) {
+		return "return log";
+	}
+}

@@ -1,0 +1,44 @@
+// generated abs fli code for ExpenseImpl
+module MExpenseDbImpl;
+export ExpenseDb,ExpenseDbImpl;
+import Expense,ExpenseImpl from MExpenseModel;
+import * from ABS.FLI;
+
+
+interface ExpenseDb {
+	List<Expense> findAll(String className);
+	List<Expense> findAllByAttributes(String className, String query);
+	Expense find(String className);
+	Expense findByAttributes(String className, String query);
+	Unit save(Expense object);
+	Unit delete(Expense object);
+	Expense update(Expense object);
+	String log(String log);
+}
+
+
+[Foreign]
+class ExpenseDbImpl implements ExpenseDb {
+	List<Expense> findAllByAttributes(String className, String query) {
+		return Nil;
+	}
+	List<Expense> findAll(String className) {
+		return Nil;
+	}
+	Expense findByAttributes(String className, String query) {
+		return new local ExpenseImpl();
+	}
+	Expense find(String className) {
+		return new local ExpenseImpl();
+	}
+	Unit save(Expense object) {
+	}
+	Unit delete(Expense object) {
+	}
+	Expense update(Expense object) {
+		return new local ExpenseImpl();
+	}
+	String log(String log) {
+		return "return log";
+	}
+}

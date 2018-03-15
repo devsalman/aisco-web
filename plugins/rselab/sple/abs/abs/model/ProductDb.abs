@@ -1,0 +1,44 @@
+// generated abs fli code for ProductImpl
+module MProductDbImpl;
+export ProductDb,ProductDbImpl;
+import Product,ProductImpl from MProductModel;
+import * from ABS.FLI;
+
+
+interface ProductDb {
+	List<Product> findAll(String className);
+	List<Product> findAllByAttributes(String className, String query);
+	Product find(String className);
+	Product findByAttributes(String className, String query);
+	Unit save(Product object);
+	Unit delete(Product object);
+	Product update(Product object);
+	String log(String log);
+}
+
+
+[Foreign]
+class ProductDbImpl implements ProductDb {
+	List<Product> findAllByAttributes(String className, String query) {
+		return Nil;
+	}
+	List<Product> findAll(String className) {
+		return Nil;
+	}
+	Product findByAttributes(String className, String query) {
+		return new local ProductImpl();
+	}
+	Product find(String className) {
+		return new local ProductImpl();
+	}
+	Unit save(Product object) {
+	}
+	Unit delete(Product object) {
+	}
+	Product update(Product object) {
+		return new local ProductImpl();
+	}
+	String log(String log) {
+		return "return log";
+	}
+}

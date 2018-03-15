@@ -1,0 +1,108 @@
+module MDonorController;
+import Donor, DonorImpl from MDonorModel;
+import DonorDb, DonorDbImpl from MDonorDbImpl;
+import ABSHttpRequest from ABS.Framework.Http;
+import Utility, UtilityImpl from ABS.Framework.Utility;
+
+interface DonorController
+{
+    Pair<String, List<Donor>> list(ABSHttpRequest request);
+    Pair<String, List<Donor>> detail(ABSHttpRequest request);
+    Pair<String, List<Donor>> create(ABSHttpRequest request);
+    Pair<String, List<Donor>> save(ABSHttpRequest request);
+    Pair<String, List<Donor>> edit(ABSHttpRequest request);
+    Pair<String, List<Donor>> update(ABSHttpRequest request);
+    Pair<String, List<Donor>> delete(ABSHttpRequest request);
+}
+
+class DonorControllerImpl implements DonorController
+{
+    Pair<String, List<Donor>> list(ABSHttpRequest request) {
+        DonorDb orm = new local DonorDbImpl();
+
+        List<Donor> donors = orm.findAll("MDonorModel.DonorImpl_c");
+
+        return Pair("donor/list", donors);
+    }
+
+    Pair<String, List<Donor>> detail(ABSHttpRequest request) {
+        String id = request.getInput("idDonor");
+        String condition = "idDonor=" + id;
+        DonorDb orm = new local DonorDbImpl();
+        Donor donor = orm.findByAttributes("MDonorModel.DonorImpl_c",condition);
+
+        List<Donor> dataModel = Nil;
+        dataModel = appendright(dataModel, donor);
+
+        return Pair("donor/detail", dataModel);
+    }
+
+    Pair<String, List<Donor>> create(ABSHttpRequest request) {
+        return Pair("donor/create", Nil);
+    }
+
+    Pair<String, List<Donor>> save(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        DonorDb orm = new local DonorDbImpl();
+        Donor donor = new local DonorImpl();
+
+        String name = request.getInput("name");
+        String email = request.getInput("email");
+        String phone = request.getInput("phone");
+        String address = request.getInput("address");
+
+        donor.setName(name);
+        donor.setEmail(email);
+        donor.setPhone(phone);
+        donor.setAddress(address);
+        orm.save(donor);
+
+        return this.list(request);
+    }
+
+    Pair<String, List<Donor>> edit(ABSHttpRequest request) {
+        String id = request.getInput("idDonor");
+        String condition = "idDonor=" + id;
+        DonorDb orm = new local DonorDbImpl();
+        Donor donor = orm.findByAttributes("MDonorModel.DonorImpl_c", condition);
+
+        List<Donor> dataModel = Nil;
+        dataModel = appendright(dataModel, donor);
+        return Pair("donor/edit", dataModel);
+    }
+
+    Pair<String, List<Donor>> update(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        String id = request.getInput("idDonor");
+        String condition = "idDonor=" + id;
+        DonorDb orm = new local DonorDbImpl();
+        Donor donor = orm.findByAttributes("MDonorModel.DonorImpl_c",condition);
+
+        String name = request.getInput("name");
+        String email = request.getInput("email");
+        String phone = request.getInput("phone");
+        String address = request.getInput("address");
+
+        donor.setName(name);
+        donor.setEmail(email);
+        donor.setPhone(phone);
+        donor.setAddress(address);
+        orm.update(donor);
+
+        return this.detail(request);
+    }
+
+    Pair<String, List<Donor>> delete(ABSHttpRequest request) {
+        String id = request.getInput("idDonor");
+        String condition = "idDonor=" + id;
+        DonorDb orm = new local DonorDbImpl();
+        Donor donor = orm.findByAttributes("MDonorModel.DonorImpl_c", condition);
+
+        orm.delete(donor);
+
+        return this.list(request);
+    }
+}
+

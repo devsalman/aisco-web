@@ -3,6 +3,7 @@ url = "user/dashboard"
 layout = "default"
 
 [spleProducts]
+[productConfigurations]
 [session]
 security = "user"
 redirect = "/"
@@ -91,7 +92,7 @@ redirect = "/"
                             <td colspan="3">
                                 <p>Features:</p>
                                 <ul id="modal_websiteFeatures">
-            
+
                                 </ul>
                             </td>
                         </tr>
@@ -146,7 +147,7 @@ $(document).ready(function() {
     $('#button_confirm').on('click', function() {
         var name = $('input[name="site-title"]').val();
         var description = $('input[name="site-description"]').val();
-        var url = $('input[name="site-url"]').val();
+        var subdomain = $('input[name="site-url"]').val();
         var features = [];
 
         $('button.list-group-item.feature.selected').each(function() {
@@ -154,6 +155,17 @@ $(document).ready(function() {
         });
 
         $('#confirmationModal').modal('hide');
+        $.request('productConfigurations::onCreate', {
+            data: {
+                name: name,
+                description: description,
+                subdomain: subdomain,
+                features: features
+            },
+            success: function(result) {
+                console.log(result);
+            }
+        });
     });
 });
 </script>

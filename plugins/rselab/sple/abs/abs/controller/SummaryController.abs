@@ -1,0 +1,117 @@
+module MSummaryController;
+
+import Summary, SummaryImpl from MSummaryModel;
+import SummaryDb, SummaryDbImpl from MSummaryDbImpl;
+import ABSHttpRequest from ABS.Framework.Http;
+import Utility, UtilityImpl from ABS.Framework.Utility;
+
+interface SummaryController {
+    Pair<String, List<Summary>> list(ABSHttpRequest request);
+    Pair<String, List<Summary>> detail(ABSHttpRequest request);
+    Pair<String, List<Summary>> create(ABSHttpRequest request);
+    Pair<String, List<Summary>> save(ABSHttpRequest request);
+    Pair<String, List<Summary>> edit(ABSHttpRequest request);
+    Pair<String, List<Summary>> update(ABSHttpRequest request);
+    Pair<String, List<Summary>> delete(ABSHttpRequest request);
+}
+
+class SummaryControllerImpl implements SummaryController {
+    Pair<String, List<Summary>> list(ABSHttpRequest request) {
+        SummaryDb orm = new local SummaryDbImpl();
+
+        List<Summary> summaries = orm.findAll("MSummaryModel.SummaryImpl_c");
+
+        return Pair("summary/list", summaries);
+    }
+
+    Pair<String, List<Summary>> detail(ABSHttpRequest request) {
+        String id = request.getInput("idSummary");
+        String condition = "idSummary=" + id;
+        SummaryDb orm = new local SummaryDbImpl();
+        Summary summary = orm.findByAttributes("MSummaryModel.SummaryImpl_c",condition);
+
+        List<Summary> dataModel = Nil;
+        dataModel = appendright(dataModel, summary);
+
+        return Pair("summary/detail", dataModel);
+    }
+
+    Pair<String, List<Summary>> create(ABSHttpRequest request) {
+        return Pair("summary/create", Nil);
+    }
+
+    Pair<String, List<Summary>> save(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        SummaryDb orm = new local SummaryDbImpl();
+        Summary summary = new local SummaryImpl();
+
+        String date = request.getInput("date");
+        String description = request.getInput("description");
+        String incomeStr = request.getInput("income");
+        Int income = utility.stringToInteger(incomeStr);
+        String expenseStr = request.getInput("expense");
+        Int expense = utility.stringToInteger(expenseStr);
+        String idProgramStr = request.getInput("idProgram");
+        Int idProgram = utility.stringToInteger(idProgramStr);
+
+        summary.setDate(date);
+        summary.setDescription(description);
+        summary.setIncome(income);
+        summary.setExpense(expense);
+        summary.setIdProgram(idProgram);
+        orm.save(summary);
+
+        return this.list(request);
+    }
+
+    Pair<String, List<Summary>> edit(ABSHttpRequest request) {
+        String id = request.getInput("idSummary");
+        String condition = "idSummary=" + id;
+        SummaryDb orm = new local SummaryDbImpl();
+        Summary summary = orm.findByAttributes("MSummaryModel.SummaryImpl_c", condition);
+
+        List<Summary> dataModel = Nil;
+        dataModel = appendright(dataModel, summary);
+        return Pair("summary/edit", dataModel);
+    }
+
+    Pair<String, List<Summary>> update(ABSHttpRequest request) {
+        Utility utility = new local UtilityImpl();
+
+        String id = request.getInput("idSummary");
+        String condition = "idSummary=" + id;
+        SummaryDb orm = new local SummaryDbImpl();
+        Summary summary = orm.findByAttributes("MSummaryModel.SummaryImpl_c",condition);
+
+        String date = request.getInput("date");
+        String description = request.getInput("description");
+        String incomeStr = request.getInput("income");
+        Int income = utility.stringToInteger(incomeStr);
+        String expenseStr = request.getInput("expense");
+        Int expense = utility.stringToInteger(expenseStr);
+        String idProgramStr = request.getInput("idProgram");
+        Int idProgram = utility.stringToInteger(idProgramStr);
+
+        summary.setDate(date);
+        summary.setDescription(description);
+        summary.setIncome(income);
+        summary.setExpense(expense);
+        summary.setIdProgram(idProgram);
+        orm.save(summary);
+
+        return this.detail(request);
+    }
+
+    Pair<String, List<Summary>> delete(ABSHttpRequest request) {
+        String id = request.getInput("idSummary");
+        String condition = "idSummary=" + id;
+        SummaryDb orm = new local SummaryDbImpl();
+        Summary summary = orm.findByAttributes("MSummaryModel.SummaryImpl_c", condition);
+
+        orm.delete(summary);
+
+        return this.list(request);
+    }
+}
+
