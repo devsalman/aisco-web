@@ -9,4 +9,6 @@ PublicationSystem, StoryBoard, AutomaticReport,
 FinancialReport, Summary, Donor,
 ObjectiveTarget, Product,InstitutionalBeneficiary);
 
-product RSELAB(Donor,Periodic,Continuous,Eventual,StoryBoard);
+product TEST1234(ProgramData,Donor,Periodic,StoryBoard,IndividualBeneficiary);
+
+product TEST111(ProgramData,Donor,Periodic,StoryBoard,Product);

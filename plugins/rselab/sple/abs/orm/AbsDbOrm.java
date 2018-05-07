@@ -255,10 +255,10 @@ public class AbsDbOrm {
 class AbsJdbcTransaction {
 
     private static String url = "jdbc:mysql://localhost:3306/";
-    private static String dbname = "abs_test";
+    private static String dbname = "dev_abs_test";
     private static String driver = "com.mysql.jdbc.Driver";
-    private static String username = "root";
-    private static String password = "";
+    private static String username = "devel";
+    private static String password = "password123";
     private Connection conn = null;
 
     private AbsJdbcTransaction() {
