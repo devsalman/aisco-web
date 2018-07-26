@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: asdf
+// Admin Name: afifun
+// Admin Email: moh.afifun46@gmail.com
+//-------------------------------// 
+
+product SekolahAfifun(Donor, Eventual, Expense, FinancialReport, Income, MemberNotification, Periodic, ProgramData, PublicationSystem, StoryBoard);

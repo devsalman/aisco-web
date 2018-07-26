@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: tes14
+// Admin Name: tes14
+// Admin Email: moh.afifun@gmail.com
+//-------------------------------// 
+
+product Tes14(Donor, Eventual, Expense, FinancialReport, Income, MemberNotification, Periodic, ProgramData, PublicationSystem, StoryBoard);

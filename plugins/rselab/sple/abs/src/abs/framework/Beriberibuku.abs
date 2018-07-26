@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: skripsina
+// Admin Name: siti ina sakinah
+// Admin Email: siti.ina@ui.ac.id
+//-------------------------------// 
+
+product Beriberibuku(AutomaticReport, DonationData, Donor, Eventual, FinancialReport, InstitutionalBeneficiary, Item, MemberNotification, Money, ObjectiveTarget, ProgramData, PublicationSystem, StoryBoard, Summary);

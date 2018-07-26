@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: My Organization
+// Admin Name: myadmin
+// Admin Email: myadmin@example.com
+//-------------------------------// 
+
+product MyProduct(AutomaticReport, Confirmation, DonationData, Donor, Eventual, FinancialReport, IndividualBeneficiary, InstitutionalBeneficiary, Item, MemberNotification, Money, ObjectiveTarget, Product, ProgramData, PublicationSystem, StoryBoard, Summary);

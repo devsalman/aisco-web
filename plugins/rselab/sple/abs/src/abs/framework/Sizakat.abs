@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: fasilkom
+// Admin Name: fasilkom
+// Admin Email: moh.afifun46@gmail.com
+//-------------------------------// 
+
+product Sizakat(AutomaticReport, Donor, Eventual, Money, Summary);

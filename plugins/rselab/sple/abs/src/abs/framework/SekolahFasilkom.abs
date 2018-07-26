@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: LabRSE Fasilkom
+// Admin Name: ade
+// Admin Email: ade@cs.ui.ac.id
+//-------------------------------// 
+
+product SekolahFasilkom(Donor, Eventual, Expense, FinancialReport, Income, MemberNotification, Periodic, ProgramData, PublicationSystem, StoryBoard);

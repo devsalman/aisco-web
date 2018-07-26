@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: tes19
+// Admin Name: tes19
+// Admin Email: moh.afifun46@gmail.com
+//-------------------------------// 
+
+product Tes19(Donor, Eventual, Expense, FinancialReport, Income, MemberNotification, Periodic, ProgramData, PublicationSystem, StoryBoard);

@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: Happy House
+// Admin Name: Maya
+// Admin Email: mayaretnoayu@gmail.com
+//-------------------------------// 
+
+product HappyLittleSchool(Donor, Eventual, Expense, FinancialReport, Income, MemberNotification, Periodic, ProgramData, PublicationSystem, StoryBoard);

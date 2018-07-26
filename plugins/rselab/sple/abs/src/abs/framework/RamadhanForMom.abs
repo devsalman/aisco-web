@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: test
+// Admin Name: test
+// Admin Email: moh.afifun@gmail.com
+//-------------------------------// 
+
+product RamadhanForMom(Donor, Eventual, Expense, FinancialReport, Income, IndividualBeneficiary, MemberNotification, Money, ObjectiveTarget, Periodic, ProgramData, PublicationSystem, StoryBoard);

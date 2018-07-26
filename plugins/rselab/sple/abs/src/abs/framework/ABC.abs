@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: ABC
+// Admin Name: ABC
+// Admin Email: fadirra@gmail.com
+//-------------------------------// 
+
+product ABC(Donor, Eventual, Expense, FinancialReport, Income, MemberNotification, Periodic, ProgramData, PublicationSystem, StoryBoard);

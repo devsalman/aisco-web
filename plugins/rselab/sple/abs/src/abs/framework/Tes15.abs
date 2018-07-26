@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: tes15
+// Admin Name: tes15
+// Admin Email: moh.afifun@gmail.com
+//-------------------------------// 
+
+product Tes15(Donor, Eventual, Expense, FinancialReport, Income, MemberNotification, Periodic, ProgramData, PublicationSystem, StoryBoard);

@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: asdf
+// Admin Name: asdf
+// Admin Email: asdf@asdf.com
+//-------------------------------// 
+
+product Asdf(Donor, Eventual, Expense, FinancialReport, Income, IndividualBeneficiary, MemberNotification, Money, ObjectiveTarget, Periodic, ProgramData, PublicationSystem, StoryBoard);

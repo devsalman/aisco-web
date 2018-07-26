@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: tes18
+// Admin Name: tes18
+// Admin Email: moh.afifun46@gmail.com
+//-------------------------------// 
+
+product Tes18(Donor, Eventual, Expense, FinancialReport, Income, MemberNotification, Periodic, ProgramData, PublicationSystem, StoryBoard);

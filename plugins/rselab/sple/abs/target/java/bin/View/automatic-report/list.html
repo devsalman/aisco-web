@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head th:replace="fragments :: head"></head>
+	<body>
+        <div th:replace="fragments :: navigation"></div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div th:replace="fragments :: menu"></div>
+                <div class="col-sm-9">
+                    <a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Automatic Report</strong></a>
+                    <hr />
+
+                    <div class="row margin-bottom-10">
+                        <div class="col-md-12">
+                            <a th:href="@{~/admin/automatic-report/create.abs}" class="btn btn-primary">Buat Automatic Report</a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Judul</th>
+                                        <th>Tanggal Terbit</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="automaticReport : ${dataList}">
+                                        <td th:text="${automaticReport.idAutomaticReport}">1</td>
+                                        <td><a th:text="${automaticReport.title.getString()}" th:href="@{~/admin/automatic-report/detail.abs(idAutomaticReport=${automaticReport.idAutomaticReport})}">Detail</a></td>
+                                        <td th:text="${automaticReport.publishDate.getString()}">Publish Date</td>
+                                        <td>
+                                            <a th:href="@{~/admin/automatic-report/delete.abs(idAutomaticReport=${automaticReport.idAutomaticReport})}" class="btn-delete">Delete</a> |
+                                            <a th:href="@{~/admin/automatic-report/edit.abs(idAutomaticReport=${automaticReport.idAutomaticReport})}" class="btn-edit">Edit</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="fragments :: footer"></footer>
+	</body>
+</html>

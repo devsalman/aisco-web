@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head th:replace="fragments :: head"></head>
+	<body>
+        <div th:replace="fragments :: navigation"></div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div th:replace="fragments :: menu"></div>
+                <div class="col-sm-9">
+                    <a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i> Pengeluaran</strong></a>
+                    <hr />
+
+                    <div class="row margin-bottom-10">
+                        <div class="col-md-12">
+                            <a th:href="@{~/admin/expense/create.abs}" class="btn btn-primary">Buat Pengeluaran</a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tanggal</th>
+                                        <th>Deskripsi</th>
+                                        <th>Jumlah</th>
+                                        <th>Program</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="expense : ${dataList}">
+                                        <td th:text="${expense.idExpense}">1</td>
+                                        <td><a th:text="${expense.date.getString()}" th:href="@{~/admin/expense/detail.abs(idExpense=${expense.idExpense})}">Detail</a></td>
+                                        <td th:text="${expense.description.getString()}">Description</td>
+                                        <td th:text="${expense.amount}">Amount</td>
+                                        <td th:text="${expense.idProgram}">Program</td>
+                                        <td>
+                                            <a th:href="@{~/admin/expense/delete.abs(idExpense=${expense.idExpense})}">Delete</a> |
+                                            <a th:href="@{~/admin/expense/edit.abs(idExpense=${expense.idExpense})}">Edit</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="fragments :: footer"></footer>
+	</body>
+</html>

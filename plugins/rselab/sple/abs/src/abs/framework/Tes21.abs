@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: tes21
+// Admin Name: tes21
+// Admin Email: moh.afifun46@gmail.com
+//-------------------------------// 
+
+product Tes21(Donor, Eventual, Expense, FinancialReport, Income, MemberNotification, Periodic, ProgramData, PublicationSystem, StoryBoard);

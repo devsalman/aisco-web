@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: Hello
+// Admin Name: admin
+// Admin Email: iis.afriyanti26@gmail.com
+//-------------------------------// 
+
+product ProductNew(Donor, Eventual, Expense, FinancialReport, Income, MemberNotification, Periodic, ProgramData, PublicationSystem, StoryBoard);

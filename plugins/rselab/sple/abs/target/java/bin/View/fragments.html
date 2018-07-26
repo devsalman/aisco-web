@@ -1,0 +1,108 @@
+<head th:fragment="head">
+    <title>Admin</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link th:href="${requestContextPath + '/css/bootstrap.min.css'}" href="/css/bootstrap.min.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link th:href="${requestContextPath + '/css/styles.css'}" href="/css/styles.css" rel="stylesheet" />
+</head>
+
+<!-- header -->
+<div id="top-nav" class="navbar navbar-inverse navbar-static-top" th:fragment="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" th:href="@{~/admin/program/list.abs}">Dashboard</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" th:href="@{~/admin/program/list.abs}" th:text="${userEmail}"> Admin </a>
+                </li>
+                <li><a th:href="${requestContextPath + '/logout'}"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /container -->
+</div>
+<!-- /Header -->
+
+<!-- header login -->
+<div id="top-nav" class="navbar navbar-inverse navbar-static-top" th:fragment="navigation-login">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{~/admin/program/list.abs}">Login</a>
+        </div>
+    </div>
+    <!-- /container -->
+</div>
+<!-- /Header login -->
+
+<div class="col-sm-3" th:fragment="menu" style="min-height: 600px;">
+    <!-- Left column -->
+    <a th:href="@{~/admin/program/list.abs}"><strong><i class="glyphicon glyphicon-menu-hamburger" /> Menu</strong></a>
+
+    <hr />
+
+    <ul class="nav nav-stacked">
+        <li class="nav-header">
+            <a href="#" data-toggle="collapse" data-target="#financial-report-menu">Financial Report <i class="glyphicon glyphicon-chevron-right"></i></a>
+            <ul class="nav nav-stacked collapse" id="financial-report-menu">
+                <li><a th:href="@{~/admin/expense/list.abs}"><i class="glyphicon glyphicon-plus"></i> Expense</a></li>
+                <li><a th:href="@{~/admin/income/list.abs}"><i class="glyphicon glyphicon-minus"></i> Income</a></li>
+                <li><a th:href="@{~/admin/summary/list.abs}"><i class="glyphicon glyphicon-stats"></i> Summary</a></li>
+                <li><a th:href="@{~/admin/donor/list.abs}"><i class="glyphicon glyphicon-user"></i> Donor</a></li>
+            </ul>
+        </li>
+        <li class="nav-header">
+            <a href="#" data-toggle="collapse" data-target="#publication-menu"> Publication <i class="glyphicon glyphicon-chevron-right"></i></a>
+            <ul class="nav nav-stacked collapse" id="publication-menu">
+                <li><a th:href="@{~/admin/story-board/list.abs}"><i class="glyphicon glyphicon-comment"></i> Story Board</a></li>
+                <li><a th:href="@{~/admin/automatic-report/list.abs}"><i class="glyphicon glyphicon-bullhorn"></i> Automatic Report</a></li>
+                <li><a th:href="@{~/admin/member-notification/list.abs}"><i class="glyphicon glyphicon-bell"></i> Notification</a></li>
+            </ul>
+        </li>
+        <li class="nav-header">
+            <a href="#" data-toggle="collapse" data-target="#donation-menu"> Donation <i class="glyphicon glyphicon-chevron-right"></i></a>
+            <ul class="nav nav-stacked collapse" id="donation-menu">
+                <li><a th:href="@{~/admin/program/list.abs}"><i class="glyphicon glyphicon-usd"></i> Money</a></li>
+                <li><a th:href="@{~/admin/program/list.abs}"><i class="glyphicon glyphicon-gift"></i> Item</a></li>
+                <li><a th:href="@{~/admin/program/list.abs}"><i class="glyphicon glyphicon-tag"></i> Confirmation</a></li>
+            </ul>
+        </li>
+        <li class="nav-header">
+            <a href="#" data-toggle="collapse" data-target="#program-menu"> Program <i class="glyphicon glyphicon-chevron-right"></i></a>
+            <ul class="nav nav-stacked collapse" id="program-menu">
+                <li><a th:href="@{~/admin/program/list.abs}"><i class="glyphicon glyphicon-tasks"></i> List Program</a></li>
+                <li><a th:href="@{~/admin/continuous-program/list.abs}"><i class="glyphicon glyphicon-tasks"></i> List Continuous Program</a></li>
+                <li><a th:href="@{~/admin/event/list.abs}"><i class="glyphicon glyphicon-tasks"></i> Event</a></li>
+            </ul>
+        </li>
+        <li class="nav-header">
+            <a href="#" data-toggle="collapse" data-target="#beneficiary-menu"> Target <i class="glyphicon glyphicon-chevron-right"></i></a>
+            <ul class="nav nav-stacked collapse" id="beneficiary-menu">
+                <li><a th:href="@{~/admin/institutional-beneficiary/list.abs}"><i class="glyphicon glyphicon-heart-empty"></i> Penerima Institusional</a></li>
+                <li><a th:href="@{~/admin/individual-beneficiary/list.abs}"><i class="glyphicon glyphicon-heart-empty"></i> Penerima Individu</a></li>
+                <li><a th:href="@{~/admin/product/list.abs}"><i class="glyphicon glyphicon-heart-empty"></i> Produk</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <hr />
+</div>
+
+<footer class="text-center" th:fragment="footer">
+    This Bootstrap 3 dashboard layout is compliments of <a href="http://www.bootply.com/85850"><strong>Bootply.com</strong></a>
+    <!-- script references -->
+    <script th:src="${requestContextPath + '/js/jquery.min.js'}" src="/js/jquery.min.js"></script>
+    <script th:src="${requestContextPath + '/js/bootstrap.min.js'}" src="/js/bootstrap.min.js"></script>
+    <script th:src="${requestContextPath + '/js/tinymce/tinymce.min.js'}" src="/js/scripts.js"></script>
+    <script th:src="${requestContextPath + '/js/scripts.js'}" src="/js/scripts.js"></script>
+</footer>

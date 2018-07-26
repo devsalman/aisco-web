@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: tes24
+// Admin Name: tes24
+// Admin Email: moh.afifun46@gmail.com
+//-------------------------------// 
+
+product Tes24(Donor, Eventual, Expense, FinancialReport, Income, MemberNotification, Periodic, ProgramData, PublicationSystem, StoryBoard);

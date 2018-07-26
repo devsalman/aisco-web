@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: Ramadhan For Kids
+// Admin Name: ramadhan for kids
+// Admin Email: moh.afifun46@gmail.com
+//-------------------------------// 
+
+product RamadhanForKids(Donor, Eventual, Expense, FinancialReport, Income, IndividualBeneficiary, MemberNotification, Money, ObjectiveTarget, Periodic, ProgramData, PublicationSystem, StoryBoard);

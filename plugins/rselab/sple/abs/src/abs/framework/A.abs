@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: a
+// Admin Name: a
+// Admin Email: a@gmail.com
+//-------------------------------// 
+
+product A(Donor, Eventual, Expense, FinancialReport, Income, MemberNotification, Periodic, ProgramData, PublicationSystem, StoryBoard);

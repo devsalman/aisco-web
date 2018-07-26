@@ -1,0 +1,7 @@
+//----- Product information -----// 
+// Organization Name: Percobaan Oman
+// Admin Name: oman
+// Admin Email: omanxyz@gmail.com
+//-------------------------------// 
+
+product PercobaanOman(AutomaticReport, Donor, Summary);
