@@ -8,5 +8,3 @@ ProgramData, Periodic, Eventual, Continuous,
 PublicationSystem, StoryBoard, AutomaticReport,
 FinancialReport, Summary, Donor,
 ObjectiveTarget, Product,InstitutionalBeneficiary);
-
-product SALMAN(ProgramData,Donor,Periodic,StoryBoard,Product);

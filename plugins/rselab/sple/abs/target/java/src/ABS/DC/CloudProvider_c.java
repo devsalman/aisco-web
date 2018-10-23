@@ -199,7 +199,7 @@ public final class CloudProvider_c extends abs.backend.java.lib.runtime.ABSObjec
                 if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",712);
                 dcs = ABS.StdLib.remove_f.apply(dcs, dc);
                 if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("dcs", dcs);if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",713);
-                abs.backend.java.lib.runtime.ABSFut tmp23426726 = abs.backend.java.lib.runtime.ABSRuntime.getCurrentRuntime().asyncCall(new abs.backend.java.lib.runtime.AbstractAsyncCallRT<ABS.DC.DeploymentComponent_i>(
+                abs.backend.java.lib.runtime.ABSFut tmp74078975 = abs.backend.java.lib.runtime.ABSRuntime.getCurrentRuntime().asyncCall(new abs.backend.java.lib.runtime.AbstractAsyncCallRT<ABS.DC.DeploymentComponent_i>(
                     this,
                     abs.backend.java.lib.runtime.ABSRuntime.checkForNull(dc),
                     new ABS.StdLib.Duration_InfDuration(),
@@ -220,18 +220,18 @@ public final class CloudProvider_c extends abs.backend.java.lib.runtime.ABSObjec
                         }
                     }.init())
                 ;
-                if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("tmp23426726",tmp23426726);
+                if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("tmp74078975",tmp74078975);
                 if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",713);
-                abs.backend.java.lib.runtime.ABSRuntime.await(new abs.backend.java.lib.runtime.ABSFutureGuard(tmp23426726));
+                abs.backend.java.lib.runtime.ABSRuntime.await(new abs.backend.java.lib.runtime.ABSFutureGuard(tmp74078975));
                 if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",713);
-                abs.backend.java.lib.types.ABSRational cost = (abs.backend.java.lib.types.ABSRational)tmp23426726.get();
+                abs.backend.java.lib.types.ABSRational cost = (abs.backend.java.lib.types.ABSRational)tmp74078975.get();
                 if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("cost",cost);
                 if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",714);
                 if (abs.backend.java.lib.expr.BinOp.gt(cost,abs.backend.java.lib.types.ABSInteger.fromString("0")).toBoolean()) {
                      {
                         if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",714);
                         if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",715);
-                        abs.backend.java.lib.runtime.ABSFut tmp1890596780 = abs.backend.java.lib.runtime.ABSRuntime.getCurrentRuntime().asyncCall(new abs.backend.java.lib.runtime.AbstractAsyncCallRT<ABS.DC.DeploymentComponent_i>(
+                        abs.backend.java.lib.runtime.ABSFut tmp1767847980 = abs.backend.java.lib.runtime.ABSRuntime.getCurrentRuntime().asyncCall(new abs.backend.java.lib.runtime.AbstractAsyncCallRT<ABS.DC.DeploymentComponent_i>(
                             this,
                             abs.backend.java.lib.runtime.ABSRuntime.checkForNull(dc),
                             new ABS.StdLib.Duration_InfDuration(),
@@ -252,17 +252,17 @@ public final class CloudProvider_c extends abs.backend.java.lib.runtime.ABSObjec
                                 }
                             }.init())
                         ;
-                        if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("tmp1890596780",tmp1890596780);
+                        if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("tmp1767847980",tmp1767847980);
                         if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",715);
-                        abs.backend.java.lib.runtime.ABSRuntime.await(new abs.backend.java.lib.runtime.ABSFutureGuard(tmp1890596780));
+                        abs.backend.java.lib.runtime.ABSRuntime.await(new abs.backend.java.lib.runtime.ABSFutureGuard(tmp1767847980));
                         if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",715);
-                        ABS.StdLib.Time creationtime = (ABS.StdLib.Time)tmp1890596780.get();
+                        ABS.StdLib.Time creationtime = (ABS.StdLib.Time)tmp1767847980.get();
                         if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("creationtime",creationtime);
                         if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",716);
                         abs.backend.java.lib.types.ABSRational time_elapse = ABS.StdLib.timeDifference_f.apply(t, creationtime);
                         if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("time_elapse",time_elapse);
                         if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",717);
-                        abs.backend.java.lib.runtime.ABSFut tmp499013935 = abs.backend.java.lib.runtime.ABSRuntime.getCurrentRuntime().asyncCall(new abs.backend.java.lib.runtime.AbstractAsyncCallRT<ABS.DC.DeploymentComponent_i>(
+                        abs.backend.java.lib.runtime.ABSFut tmp704267866 = abs.backend.java.lib.runtime.ABSRuntime.getCurrentRuntime().asyncCall(new abs.backend.java.lib.runtime.AbstractAsyncCallRT<ABS.DC.DeploymentComponent_i>(
                             this,
                             abs.backend.java.lib.runtime.ABSRuntime.checkForNull(dc),
                             new ABS.StdLib.Duration_InfDuration(),
@@ -283,11 +283,11 @@ public final class CloudProvider_c extends abs.backend.java.lib.runtime.ABSObjec
                                 }
                             }.init())
                         ;
-                        if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("tmp499013935",tmp499013935);
+                        if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("tmp704267866",tmp704267866);
                         if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",717);
-                        abs.backend.java.lib.runtime.ABSRuntime.await(new abs.backend.java.lib.runtime.ABSFutureGuard(tmp499013935));
+                        abs.backend.java.lib.runtime.ABSRuntime.await(new abs.backend.java.lib.runtime.ABSFutureGuard(tmp704267866));
                         if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",717);
-                        abs.backend.java.lib.types.ABSInteger interval = (abs.backend.java.lib.types.ABSInteger)tmp499013935.get();
+                        abs.backend.java.lib.types.ABSInteger interval = (abs.backend.java.lib.types.ABSInteger)tmp704267866.get();
                         if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("interval",interval);
                         if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",718);
                         if (abs.backend.java.lib.expr.BinOp.eq(time_elapse.mod(interval),abs.backend.java.lib.types.ABSInteger.fromString("0")).toBoolean()) {
@@ -366,7 +366,7 @@ public final class CloudProvider_c extends abs.backend.java.lib.runtime.ABSObjec
                     if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("result", result);if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",739);
                     CloudProvider_c.this.nextInstanceId = CloudProvider_c.this.nextInstanceId.add(abs.backend.java.lib.types.ABSInteger.fromString("1"));
                     if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",740);
-                    abs.backend.java.lib.runtime.ABSFut tmp1569504050 = abs.backend.java.lib.runtime.ABSRuntime.getCurrentRuntime().asyncCall(new abs.backend.java.lib.runtime.AbstractAsyncCallRT<ABS.DC.DeploymentComponent_i>(
+                    abs.backend.java.lib.runtime.ABSFut tmp366133962 = abs.backend.java.lib.runtime.ABSRuntime.getCurrentRuntime().asyncCall(new abs.backend.java.lib.runtime.AbstractAsyncCallRT<ABS.DC.DeploymentComponent_i>(
                         this,
                         abs.backend.java.lib.runtime.ABSRuntime.checkForNull(result),
                         new ABS.StdLib.Duration_InfDuration(),
@@ -387,11 +387,11 @@ public final class CloudProvider_c extends abs.backend.java.lib.runtime.ABSObjec
                             }
                         }.init())
                     ;
-                    if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("tmp1569504050",tmp1569504050);
+                    if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("tmp366133962",tmp366133962);
                     if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",740);
-                    abs.backend.java.lib.runtime.ABSRuntime.await(new abs.backend.java.lib.runtime.ABSFutureGuard(tmp1569504050));
+                    abs.backend.java.lib.runtime.ABSRuntime.await(new abs.backend.java.lib.runtime.ABSFutureGuard(tmp366133962));
                     if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",740);
-                    abs.backend.java.lib.types.ABSRational startup_duration = (abs.backend.java.lib.types.ABSRational)tmp1569504050.get();
+                    abs.backend.java.lib.types.ABSRational startup_duration = (abs.backend.java.lib.types.ABSRational)tmp366133962.get();
                     if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("startup_duration",startup_duration);
                     if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",741);
                     abs.backend.java.lib.runtime.ABSRuntime.await(new abs.backend.java.lib.runtime.ABSExpGuard() { public abs.backend.java.lib.types.ABSBool evaluateExp() { return abs.backend.java.lib.types.ABSBool.TRUE; }});
@@ -750,7 +750,7 @@ public final class CloudProvider_c extends abs.backend.java.lib.runtime.ABSObjec
                 if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",796);
                 instances = ABS.StdLib.remove_f.apply(instances, instance);
                 if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("instances", instances);if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",797);
-                abs.backend.java.lib.runtime.ABSFut tmp85102332 = abs.backend.java.lib.runtime.ABSRuntime.getCurrentRuntime().asyncCall(new abs.backend.java.lib.runtime.AbstractAsyncCallRT<ABS.DC.DeploymentComponent_i>(
+                abs.backend.java.lib.runtime.ABSFut tmp1595278145 = abs.backend.java.lib.runtime.ABSRuntime.getCurrentRuntime().asyncCall(new abs.backend.java.lib.runtime.AbstractAsyncCallRT<ABS.DC.DeploymentComponent_i>(
                     this,
                     abs.backend.java.lib.runtime.ABSRuntime.checkForNull(instance),
                     new ABS.StdLib.Duration_InfDuration(),
@@ -774,11 +774,11 @@ public final class CloudProvider_c extends abs.backend.java.lib.runtime.ABSObjec
                         }
                     }.init(description))
                 ;
-                if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("tmp85102332",tmp85102332);
+                if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("tmp1595278145",tmp1595278145);
                 if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",797);
-                abs.backend.java.lib.runtime.ABSRuntime.await(new abs.backend.java.lib.runtime.ABSFutureGuard(tmp85102332));
+                abs.backend.java.lib.runtime.ABSRuntime.await(new abs.backend.java.lib.runtime.ABSFutureGuard(tmp1595278145));
                 if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",797);
-                abs.backend.java.lib.types.ABSBool matches = (abs.backend.java.lib.types.ABSBool)tmp85102332.get();
+                abs.backend.java.lib.types.ABSBool matches = (abs.backend.java.lib.types.ABSBool)tmp1595278145.get();
                 if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().getCurrentTask().setLocalVariable("matches",matches);
                 if (__ABS_getRuntime().debuggingEnabled()) __ABS_getRuntime().nextStep("abs/lang/abslang.abs",798);
                 if (matches.toBoolean()) {
